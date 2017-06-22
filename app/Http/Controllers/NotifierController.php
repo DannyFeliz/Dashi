@@ -43,4 +43,9 @@ class NotifierController
             }
         }
     }
+
+    public function noAllowed()
+    {
+        return view("notifier.notallowed");
+    }
 }
