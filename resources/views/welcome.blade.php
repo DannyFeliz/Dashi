@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Dashi</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -46,7 +46,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 60px;
             }
 
             .links > a {
@@ -61,6 +61,13 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+            }
+
+            .no-style{
+                text-decoration: none;
+            }
+            p{
+                font-family: sans-serif;
             }
         </style>
     </head>
@@ -78,16 +85,13 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="">
+                    <p class="title" style="margin: 0;">Welcome to Dashi<p>
+                    <p>Get a notification in Slack every time someone asks you to check his code on Github.</p>
+                    <p>
+                        Please <a class="no-style" href="{{ url('/login') }}">Login</a> or
+                              <a class="no-style" href="{{ url('/register') }}">Register</a>
+                    </p>
                 </div>
             </div>
         </div>
