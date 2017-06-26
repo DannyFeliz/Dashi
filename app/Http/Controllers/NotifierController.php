@@ -30,7 +30,9 @@ class NotifierController
     {
         $notification = json_decode($request->toArray()["payload"], true);
 
-        if (!$notification) return;
+        // We need this because Github send us a request to verify if the given endpoint exists
+        if(is_null(array_key_exists("action", $notification))) return;
+
         if ($notification["action"] !== "review_requested") return;
 
         $username = $notification["requested_reviewer"]["login"];
