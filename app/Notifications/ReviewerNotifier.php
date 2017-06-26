@@ -57,27 +57,21 @@ class ReviewerNotifier extends Notification
 
     public function toSlack($notifiable)
     {
-
         $notification = $this->notification;
 
-
-        $user = json_decode($this->client->get($notification["sender"]["url"])
-        ->getBody()
-        ->getContents(),
-        true);
-
-        $name = $user['name'] ? $user['name'] : $notification["sender"]["login"];
+        $username = $notification["sender"]["login"];
 
         return (new SlackMessage)
         ->from("Dashi")
         ->image("http://icons.iconarchive.com/icons/thehoth/seo/256/seo-web-code-icon.png")
         ->success()
-        ->content(":eyes: ¡{$name} needs you to make him a Code Review to his changes!")
+        ->content(":eyes: ¡{$username} needs you to make him a Code Review to his changes!")
         ->attachment(function ($attachment) use ($notification) {
             $attachment->title($notification["pull_request"]["title"], $notification["pull_request"]["html_url"])
-            ->content(":sleuth_or_spy: ¡Make sure everything is in order before approving the Pull Request!")
+            ->content(":sleuth_or_spy: ¡Make sure everything is in order before approve the Pull Request!")
             ->fields([
             "User" => $notification["sender"]["login"],
+            "Repository" => $notification["repository"]["name"],
             "Commit(s)" => $this->getCommitsCount(),
             "File(s) changed" => $notification["pull_request"]["changed_files"]
             ]);
