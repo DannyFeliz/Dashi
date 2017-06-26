@@ -30,6 +30,7 @@ class NotifierController
     {
         $notification = json_decode($request->toArray()["payload"], true);
 
+        if (!$notification) return;
         if ($notification["action"] !== "review_requested") return;
 
         $username = $notification["requested_reviewer"]["login"];
