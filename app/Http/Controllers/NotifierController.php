@@ -28,10 +28,12 @@ class NotifierController
     */
     public function index(Request $request)
     {
+
         $notification = json_decode($request->toArray()["payload"], true);
 
-        // We need this because Github send us a request to verify if the given endpoint exists
-        if(is_null(array_key_exists("action", $notification))) return;
+        // We need to check if the action key exists because Github send us a request to verify
+        // if the given endpoint exists, otherwise is an event that has been triggered
+        if(!array_key_exists("action", $notification)) return;
 
         if ($notification["action"] !== "review_requested") return;
 
