@@ -84,7 +84,7 @@ class ReviewerNotifier extends Notification
                      ->markdown(["Commits", "text"])                                                                                     
                      ->fields([                                                                                                          
                          "User" => $notification["sender"]["login"],                                                                     
-                         "File changed" => $notification["pull_request"]["changed_files"]                                                
+                         "File(s) changed" => $notification["pull_request"]["changed_files"]                                                
                      ]);                                                                                                                 
              });                                                                                                                         
      }                                                                                                                                   
