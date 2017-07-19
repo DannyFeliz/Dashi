@@ -3,17 +3,13 @@
 namespace App\Notifications;
 
 use GuzzleHttp\Client;
-use Illuminate\Bus\Queueable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use function json_decode;
 
 
-class ReviewerNotifier extends Notification
+class RequestReview extends Notification
 {
-    use Queueable;
 
     public $notification;
     public $client;
@@ -31,31 +27,14 @@ class ReviewerNotifier extends Notification
     /**
     * Get the notification's delivery channels.
     *
-    * @param  mixed $notifiable
     * @return array
     */
-    public function via($notifiable)
+    public function via()
     {
         return ['slack'];
     }
 
-    /**
-    * Get the pull request commits count
-    *
-    * @return array
-    */
-    public function getCommitsCount()
-    {
-        $commitsUrl = $this->notification["pull_request"]["commits_url"];
-        $commits = json_decode($this->client->get($commitsUrl)
-        ->getBody()
-        ->getContents(),
-        true);
-
-        return count($commits);
-    }
-
-    public function toSlack($notifiable)
+    public function toSlack()
     {
         $notification = $this->notification;
 
@@ -65,14 +44,13 @@ class ReviewerNotifier extends Notification
         ->from("Dashi")
         ->image("http://icons.iconarchive.com/icons/thehoth/seo/256/seo-web-code-icon.png")
         ->success()
-        ->content(":eyes: ¡{$username} needs you to make him a Code Review to his changes!")
+        ->content(":microscope: {$username} needs you to make a Code Review to this changes")
         ->attachment(function ($attachment) use ($notification) {
             $attachment->title($notification["pull_request"]["title"], $notification["pull_request"]["html_url"])
-            ->content(":sleuth_or_spy: ¡Make sure everything is in order before approve the Pull Request!")
+            ->content(":sleuth_or_spy: Make sure everything is in order before approve the Pull Request")
             ->fields([
             "User" => $notification["sender"]["login"],
             "Repository" => $notification["repository"]["name"],
-            "Commit(s)" => $this->getCommitsCount(),
             "File(s) changed" => $notification["pull_request"]["changed_files"]
             ]);
         });
