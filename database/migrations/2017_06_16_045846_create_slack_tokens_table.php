@@ -29,6 +29,6 @@ class CreateSlackTokensTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('slack_tokens');
     }
 }
