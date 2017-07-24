@@ -43,7 +43,7 @@ class RequestChanges extends Notification
             ->from("Dashi")
             ->image("http://icons.iconarchive.com/icons/thehoth/seo/256/seo-web-code-icon.png")
             ->error()
-            ->content(":hammer_and_wrench: {$user} wants you to make some changes to this Pull Request.")
+            ->content(":hammer_and_wrench: *{$user}* wants you to make some changes to this Pull Request.")
             ->attachment(function ($attachment) use ($notification) {
                 $attachment->title($notification["pull_request"]["title"], $notification["review"]["_links"]["html"]["href"])
                     ->content(":crossed_swords: Make the changes and update the Pull Request.")
