@@ -10,6 +10,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+
         <!-- Styles -->
         <style>
             html, body {
@@ -86,7 +89,10 @@
 
             <div class="content">
                 <div class="">
-                    <p class="title" style="margin: 0;">Welcome to Dashi<p>
+                    <figure class="logo">
+                        <img src="{{ asset('img/dashi-logo.png') }}"/>
+                    </figure>
+                    <!-- <p class="title" style="margin: 0;">Welcome to Dashi<p> -->
                     <p>Get a notification in Slack every time someone asks you to check his code on Github.</p>
                     <p>
                         Please <a class="no-style" href="{{ url('/login') }}">Login</a> or
