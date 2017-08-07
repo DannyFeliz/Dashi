@@ -57,11 +57,8 @@ class GithubNotification
      */
     public function reviewRequested()
     {
-        $reviewers = $this->notification["pull_request"]["requested_reviewers"];
-
-        foreach ($reviewers as $reviewer) {
-            $this->notify($reviewer["login"]);
-        }
+        $reviewers = $this->notification["pull_request"]["requested_reviewer"];
+        $this->notify($reviewer["login"]);
     }
 
 
