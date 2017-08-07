@@ -8,7 +8,9 @@
                 <div class="panel-heading">Settings</div>
 
                 <div class="panel-body">
-                    <p>Configure your <a target="_blank" href="https://github.com">Github</a> username and <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Webhook</a></p>
+                    <p>Configure your <a target="_blank" href="https://github.com">Github</a> and
+                        <a target="_blank" href="https://bitbucket.com">Bitbucket</a> username also create a
+                        <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Webhook</a></p>
 
                         @if (session('message'))
                             <div class="alert alert-success">
@@ -23,14 +25,23 @@
                         <div class="form-group">
                             <label>Github username</label>
                             <input type="text"
-                                   required
-                                   minlength="1"
                                    name="github_username"
                                    class="form-control"
                                    value="{{ $token->github_username}}"
                                    placeholder="JhonDoe"
                             >
+
                         </div>
+
+                            <div class="form-group">
+                                <label>Bitbucket username</label>
+                                <input type="text"
+                                       name="bitbucket_username"
+                                       class="form-control"
+                                       value="{{ $token->bitbucket_username}}"
+                                       placeholder="JhonDoe"
+                                >
+                            </div>
 
                         <div class="form-group">
                             <label>Slack Webhook</label>
