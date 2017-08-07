@@ -17,7 +17,8 @@ class CreateSlackTokensTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->string('token');
-            $table->string('github_username');
+            $table->string('github_username')->nullable();
+            $table->string('bitbucket_username')->nullable();
             $table->timestamps();
         });
     }
