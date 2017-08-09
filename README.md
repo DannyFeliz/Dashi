@@ -31,4 +31,4 @@ Use [http://dashinotify.com/notifier](http://dashinotify.com/notifier) as the UR
 <hr>
 
 > ### Bitbucket
-![bitbucket](https://i.imgur.com/S5x0uHd.png)
+![bitbucket](https://i.imgur.com/7GwB4LX.png)
