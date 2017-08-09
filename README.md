@@ -21,6 +21,7 @@ Get a notification in Slack every time someone asks you to check some code on Gi
 <hr>
 
 > # Setup your Repository
+Use [http://dashinotify.com/notifier](http://dashinotify.com/notifier) as the URL of the WebHook.
 
 > ### Github
 ![bitbucket](https://i.imgur.com/mE2sPWX.png)
