@@ -35,9 +35,9 @@ class NotifierController
         if (!$vcs) return;
 
         if ($vcs->name == "Github") {
-            (new GithubNotification($request))->run();
+            new GithubNotification($request);
         } else if ($vcs->name == "Bitbucket") {
-            (new BitbucketNotification($request))->run();
+            new BitbucketNotification($request);
         }
 
         echo "Done With " . $vcs->name;
