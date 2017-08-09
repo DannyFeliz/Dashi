@@ -19,6 +19,7 @@ class BitbucketNotification
     public function __construct($notification)
     {
         $this->notification = $notification;
+        $this->run();
     }
 
 
