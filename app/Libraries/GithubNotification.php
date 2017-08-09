@@ -58,10 +58,9 @@ class GithubNotification
      */
     public function reviewRequested()
     {
-        $reviewers = $this->notification["pull_request"]["requested_reviewers"];
-        foreach ($reviewers as $reviewer) {
-            $this->notify($reviewer["login"]);
-        }
+        // Remember that the Webhook is triggered for each reviewer in the pull request
+        $reviewer = $this->notification["requested_reviewer"]["login"];
+        $this->notify($reviewer);
     }
 
 
