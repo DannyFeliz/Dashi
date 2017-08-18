@@ -37,7 +37,13 @@ class NotifierController
         if ($vcs->name == "Github") {
             new GithubNotification($request);
         } else if ($vcs->name == "Bitbucket") {
-            new BitbucketNotification($request);
+            // Only 'pullrequest:created' action is supported at this moment
+            $validAction = $request->header("X-Event-Key") == "pullrequest:created";
+            if ($validAction) {
+                new BitbucketNotification($request);
+            } else {
+                echo "Not a valid action. Only 'pullrequest:created' action is supported at this moment.\n";
+            }
         }
 
         echo "Done With " . $vcs->name;
