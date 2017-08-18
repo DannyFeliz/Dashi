@@ -14,7 +14,6 @@ use App\Libraries\GithubNotification;
 use App\VersionControlSystem;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
-use function in_array;
 
 class NotifierController
 {
