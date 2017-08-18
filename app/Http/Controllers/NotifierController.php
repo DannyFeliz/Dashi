@@ -40,7 +40,7 @@ class NotifierController
             new BitbucketNotification($request);
         }
 
-        echo "Done With " . $vcs->name;
+        echo "Everything went well with " . $vcs->name . ".";
     }
 
     public function noAllowed()
