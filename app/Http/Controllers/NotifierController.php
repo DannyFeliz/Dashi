@@ -14,6 +14,7 @@ use App\Libraries\GithubNotification;
 use App\VersionControlSystem;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use function in_array;
 
 class NotifierController
 {
@@ -37,16 +38,10 @@ class NotifierController
         if ($vcs->name == "Github") {
             new GithubNotification($request);
         } else if ($vcs->name == "Bitbucket") {
-            // Only 'pullrequest:created' action is supported at this moment
-            $validAction = $request->header("X-Event-Key") == "pullrequest:created";
-            if ($validAction) {
-                new BitbucketNotification($request);
-            } else {
-                echo "Not a valid action. Only 'pullrequest:created' action is supported at this moment.\n";
-            }
+            new BitbucketNotification($request);
         }
 
-        echo "Done With " . $vcs->name;
+        echo "Everything went well with " . $vcs->name . ".";
     }
 
     public function noAllowed()
