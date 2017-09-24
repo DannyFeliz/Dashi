@@ -39,7 +39,11 @@ class GithubNotification
         $validActions = ["review_requested", "submitted"];
 
         $action = $this->notification["action"];
-        if (!in_array($action, $validActions)) return;
+        if (!in_array($action, $validActions)) {
+            $actionsList = implode("', '", $validActions);
+            echo "The action '{$action}' is not valid. Only '{$actionsList}' actions are supported at this moment.\n";
+            return;
+        }
 
         $this->actions["reviewRequested"] = $action == "review_requested";
         $this->actions["changesRequested"] = $action == "submitted" &&
