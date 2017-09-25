@@ -28,7 +28,6 @@ class BitbucketNotification
         $action = $this->notification->header("X-Event-Key");
         $validActions = ["pullrequest:created"];
 
-        // Only 'pullrequest:created' action is supported at this moment
         if (!in_array($action, $validActions)) {
             echo "The action '{$action}' is not valid. Only 'pullrequest:created' action is supported at this moment.\n";
             return;
@@ -55,6 +54,11 @@ class BitbucketNotification
         }
     }
 
+    /**
+     * Constructs the data required for the request review notification
+     *
+     * @return array
+     */
     public function requestReviewData()
     {
         return [

@@ -5,6 +5,7 @@ namespace App\Libraries;
 
 use App\Notifications\RequestChanges;
 use App\Notifications\RequestReview;
+use App\Notifications\MentionInComment;
 use App\SlackToken;
 use App\User;
 
@@ -14,8 +15,8 @@ class GithubNotification
     public $actions = [
         "reviewRequested" => false,
         "changesRequested" => false,
+        "mentionedInComment" => false,
     ];
-
 
     /**
      * GithubNotification constructor.
@@ -30,13 +31,14 @@ class GithubNotification
 
     public function run()
     {
+
         $this->notification = json_decode($this->notification->toArray()["payload"], true);
 
         // We need to check if the action key exists because Github send us a request to verify
         // if the given endpoint exists, otherwise is an event that has been triggered
         if (!array_key_exists("action", $this->notification)) return;
 
-        $validActions = ["review_requested", "submitted"];
+        $validActions = ["review_requested", "submitted", "created"];
 
         $action = $this->notification["action"];
         if (!in_array($action, $validActions)) {
@@ -45,20 +47,22 @@ class GithubNotification
             return;
         }
 
-        $this->actions["reviewRequested"] = $action == "review_requested";
-        $this->actions["changesRequested"] = $action == "submitted" &&
-                                             $this->notification["review"]['state'] == "changes_requested";
+        $this->actions["reviewRequested"] = $action === "review_requested";
+        $this->actions["changesRequested"] = $action === "submitted" &&
+                                             $this->notification["review"]['state'] === "changes_requested";
+        $this->actions["mentionedInComment"] = $action === "created";
 
         if ($this->actions["reviewRequested"]) {
             $this->reviewRequested();
         } else if ($this->actions["changesRequested"]) {
             $this->changesRequested();
+        } else if ($this->actions["mentionedInComment"]) {
+            $this->mentionInComment();
         }
     }
 
-
     /**
-     * Notify each reviewer in the list
+     * Notify the reviewer
      */
     public function reviewRequested()
     {
@@ -66,7 +70,6 @@ class GithubNotification
         $reviewer = $this->notification["requested_reviewer"]["login"];
         $this->notify($reviewer);
     }
-
 
     /**
      * Notify to the pull request owner about the changes request
@@ -77,6 +80,20 @@ class GithubNotification
         $this->notify($username);
     }
 
+    /**
+     * Notify to all mentioned users in a comment
+     */
+    public function mentionInComment()
+    {
+        $mentionedUsers = Utils::extractUsernames($this->notification["comment"]["body"]);
+        if (count($mentionedUsers)) {
+            foreach ($mentionedUsers as $user) {
+                $this->notify($user);
+            }
+        } else {
+            echo "There are no mentions in this comment.\n";
+        }
+    }
 
     /**
      * Dispatch the corresponding notification
@@ -89,13 +106,24 @@ class GithubNotification
         if ($slackToken) {
             $user = User::where("id", $slackToken->user_id)->first();
             if ($this->actions["reviewRequested"]) {
-                $user->notify(new RequestReview($this->requestReviewData()));
+                $notification = new RequestReview($this->requestReviewData());
             } else if ($this->actions["changesRequested"]) {
-                $user->notify(new RequestChanges($this->requestChangesData()));
+                $notification = new RequestChanges($this->requestChangesData());
+            } else if ($this->actions["mentionedInComment"]) {
+                $notification = new MentionInComment($this->mentionInCommentData());
+            } else {
+                return;
             }
+
+            $user->notify($notification);
         }
     }
 
+    /**
+     * Constructs the data required for the request review notification
+     *
+     * @return array
+     */
     public function requestReviewData()
     {
         return [
@@ -109,7 +137,7 @@ class GithubNotification
     }
 
     /**
-     * Array
+     * Constructs the data required for the request changes notification
      *
      * @return array
      */
@@ -121,6 +149,23 @@ class GithubNotification
             "url" => $this->notification["pull_request"]["html_url"],
             "repository" => $this->notification["repository"]["name"],
             "comment" => $this->notification["review"]["body"],
+            "from" => "Github"
+        ];
+    }
+
+    /**
+     * Constructs the data required for the mention in comment notification
+     *
+     * @return array
+     */
+    public function mentionInCommentData()
+    {
+        return [
+            "username" => $this->notification["comment"]["user"]["login"],
+            "title" => $this->notification["pull_request"]["title"],
+            "url" => $this->notification["comment"]["html_url"],
+            "repository" => $this->notification["repository"]["name"],
+            "comment" => $this->notification["comment"]["body"],
             "from" => "Github"
         ];
     }
