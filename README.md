@@ -5,7 +5,7 @@ Get a notification in Slack every time someone asks you to check some code on Gi
   <img width="350" src="http://dashinotify.com/img/dashi-logo.png">
 </p>
 
-# Screenshot
+# Screenshots
 #### Success
 <img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/success-example.png">
 
