@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSlackTokensTable extends Migration
+class CreateVersionControlSystemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSlackTokensTable extends Migration
      */
     public function up()
     {
-        Schema::create('slack_tokens', function (Blueprint $table) {
+        Schema::create('version_control_systems', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index();
-            $table->string('token');
-            $table->string('github_username')->nullable();
-            $table->string('bitbucket_username')->nullable();
+            $table->string('user_agent')->index();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateSlackTokensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slack_tokens');
+        Schema::dropIfExists('version_control_systems');
     }
 }
