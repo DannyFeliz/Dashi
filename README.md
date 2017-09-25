@@ -74,7 +74,7 @@ Get a notification in Slack every time someone asks you to check some code on Gi
 <hr>
 
 > ### Setup your info in [Dashi](http://dashinotify.com)
-1. Go to [Dashi](http://dashinotify.com/register) and login o register
+1. Go to [Dashi](http://dashinotify.com/register) and login or signup
 2. Type your Github or Bitbucket username 
 3. Paste the copied Slack Webook URL
 4. Save :)
