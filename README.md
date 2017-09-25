@@ -6,8 +6,8 @@ Get a notification in Slack every time someone asks you to check some code on Gi
 </p>
 
 # Screenshots
-#### Success
-<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/success-example.png">
+#### Request review
+<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/request-review-example.png">
 
 #### Request Changes
 <img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/request-changes-example.png">
