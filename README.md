@@ -5,6 +5,17 @@ Get a notification in Slack every time someone asks you to check some code on Gi
   <img width="350" src="http://dashinotify.com/img/dashi-logo.png">
 </p>
 
+# Screenshot
+#### Success
+<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/success-example.png">
+
+#### Request Changes
+<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/request-changes-example.png">
+
+#### Mention in comment
+<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/mention-in-comment-example.png">
+
+
 # Support
 <table>
     <tr>
