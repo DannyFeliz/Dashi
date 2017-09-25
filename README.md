@@ -7,7 +7,7 @@ Get a notification in Slack every time someone asks you to check some code on Gi
 
 # Screenshots
 #### Request review
-<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/request-review-example.png">
+<img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/request-review-pr-example.png">
 
 #### Request Changes
 <img src="https://raw.githubusercontent.com/DannyFeliz/Dashi/master/public/img/screenshot/request-changes-example.png">
