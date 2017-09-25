@@ -44,7 +44,7 @@ class MentionInComment extends Notification
         return (new SlackMessage)
             ->from(env("APP_NAME"))
             // TODO: Change this icon with other
-            ->image(env("APP_URL") . "/img/dashi-danger.png")
+            ->image(env("APP_URL") . "/img/dashi-warning.png")
             ->warning()
             ->content(":loud_sound: *{$notification['username']}* mentioned you in this Pull Request.")
             ->attachment(function ($attachment) use ($notification) {
