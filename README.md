@@ -24,17 +24,17 @@ Get a notification in Slack every time someone asks you to check some code on Gi
         <th>Bitcket</th>
     </tr>
     <tr>
-        <td>Request Review in a pull request</td>
+        <td>Request Review (pull request)</td>
         <td>:heavy_check_mark:</td>
         <td>:heavy_check_mark:</td>
     </tr>
     <tr>
-        <td>Request Changes in a pull request</td>
+        <td>Request Changes (pull request)</td>
         <td>:heavy_check_mark:</td>
         <td></td>
     </tr>
     <tr>
-        <td>Mentions in comments</td>
+        <td>Mentions in comments (pull request diff code)</td>
         <td>:heavy_check_mark:</td>
         <td></td>
     </tr>
