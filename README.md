@@ -21,7 +21,7 @@ Get a notification in Slack every time someone asks you to check some code on Gi
     <tr>
         <th>Feature</th>
         <th>Github</th>
-        <th>Bitcket</th>
+        <th>Bitbucket</th>
     </tr>
     <tr>
         <td>Request Review (pull request)</td>
