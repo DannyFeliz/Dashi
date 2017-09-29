@@ -1,3 +1,7 @@
+#app {
+    height: 100%;
+}
+
 .logo img {
   width: 100%;
 }
@@ -5,4 +9,16 @@
 .logo-inline {
     width: 190px;
     padding: 8px 20px;
+}
+
+.login-wrapper {
+    background-color: white;
+}
+
+.login-wrapper .bg-pic>img {
+    opacity: 1;
+}
+
+.login-wrapper .login-container {
+    opacity: 0.95;
 }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
@@ -11,16 +11,16 @@
     <title>{{ config('app.name', 'Dashi') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/pages.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <!-- <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
@@ -28,7 +28,6 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
                     <a href="{{ url('/') }}">
                        <figure class="logo logo-inline">
                             <img src="{{ asset('img/dashi-inline-logo.png') }}"/>
@@ -37,14 +36,11 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
@@ -72,12 +68,31 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
         @yield('content')
+
     </div>
 
     <!-- Scripts -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        (function() {
+            const AUTH_BG = document.querySelector("#auth-bg");
+            const WINDOWS_WIDTH = window.innerWidth;
+            const WINDOW_HEIGHT = window.innerHeight;
+            const UNSPLASH_API = "https://source.unsplash.com/category/technology/";
+
+            if(WINDOWS_WIDTH > 768) {
+                AUTH_BG.setAttribute("src", `${UNSPLASH_API}${WINDOWS_WIDTH}x${WINDOW_HEIGHT}`);
+
+                return;
+            }
+
+            AUTH_BG.remove()
+
+        })();
+    </script>
 </body>
 </html>
