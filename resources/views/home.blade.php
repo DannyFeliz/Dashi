@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     <p>Configure your <a target="_blank" href="https://github.com">Github</a> and
                         <a target="_blank" href="https://bitbucket.com">Bitbucket</a> username also create a
-                        <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Webhook</a></p>
+                        <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Incoming Webhook</a></p>
 
                         @if (session('message'))
                             <div class="alert alert-success">
@@ -44,7 +44,7 @@
                             </div>
 
                         <div class="form-group">
-                            <label>Slack Webhook</label>
+                            <label>Slack Webhook URL</label>
                             <input type="text"
                                    required
                                    name="token"
