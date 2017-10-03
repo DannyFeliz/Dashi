@@ -10,6 +10,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/pages.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 
 
@@ -75,17 +77,20 @@
         </style>
     </head>
     <body>
+    <!--     <div class="bg-pic">
+      <img class="auth-bg" src="" class="lazy">
+    </div> -->
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
+    <!--         @if (Route::has('login'))
+        <div class="top-right links">
+            @if (Auth::check())
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="{{ url('/login') }}">Login</a>
+                <a href="{{ url('/register') }}">Register</a>
             @endif
+        </div>
+    @endif -->
 
             <div class="content">
                 <div class="">
@@ -93,13 +98,18 @@
                         <img src="{{ asset('img/dashi-logo.png') }}"/>
                     </figure>
                     <!-- <p class="title" style="margin: 0;">Welcome to Dashi<p> -->
-                    <p>Get a notification in Slack every time someone asks you to check his code on Github.</p>
-                    <p>
-                        Please <a class="no-style" href="{{ url('/login') }}">Login</a> or
-                              <a class="no-style" href="{{ url('/register') }}">Register</a>
-                    </p>
+                    <p class="m-b-20">Get a notification in Slack every time someone asks you to check his code on Github.</p>
+                    <div class="row">
+                        <div class="col text-right">
+                            <a class="btn btn-complete btn-cons" href="{{ url('/login') }}">Login</a>
+                        </div>
+                        <div class="col text-left">
+                            <a class="btn btn-complete btn-cons" href="{{ url('/register') }}">Register</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/scripts.js') }}"></script>
     </body>
 </html>
