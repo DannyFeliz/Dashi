@@ -130,3 +130,26 @@ h6 {
 .support .table {
     margin-top: 20px;
 }
+
+.setup {
+    font-family: arial;
+}
+
+.setup {
+    font-size: 18px;
+}
+
+.setup #dashi li {
+    line-height: 34px;
+}
+
+.intro-arrow {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    font-size: 35px;
+}
+
+.intro-arrow p {
+    font-size: 14px;
+}

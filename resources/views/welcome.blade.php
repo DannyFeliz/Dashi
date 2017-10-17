@@ -9,6 +9,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/pages.min.css') }}" rel="stylesheet">
@@ -46,6 +48,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="intro-arrow">
+                <i class="fa fa-angle-down animated infinite bounce" aria-hidden="true"></i>
+                <p>See more</p>
             </div>
         </div>
         <div class="section examples">
@@ -159,28 +165,26 @@
                                 </div>
                               </div>
                             </div>
-                            <div class="tab-pane " id="dashi">
+                            <div class="tab-pane" id="dashi">
                               <div class="row">
-                                <div class="col-lg-12">
-                                  <h3>“ Nothing is
-                                    <span class="semi-bold">impossible</span>, the word itself says 'I'm
-                                    <span class="semi-bold">possible</span>'! ”
-                                  </h3>
-                                  <p>A style represents visual customizations on top of a layout. By editing a style, you can use Squarespace's visual interface to customize your...</p>
-                                  <br>
-                                  <p class="pull-right">
-                                    <button type="button" class="btn btn-default btn-cons">White</button>
-                                    <button type="button" class="btn btn-success btn-cons">Success</button>
-                                  </p>
+                                <div class="col">
+                                  <ol class="m-t-20">
+                                      <li>Go to <a href="http://dashinotify.com/login" target="_blank">Dashi</a> and login or signup</li>
+                                      <li>Type your Github or Bitbucket username</li>
+                                      <li>Paste the copied Slack Webook URL</li>
+                                      <li>Save :)</li>
+                                  </ol>
                                 </div>
                               </div>
                             </div>
                             <div class="tab-pane" id="repository">
                               <div class="row">
-                                <div class="col-lg-12">
-                                  <h3>Follow us &amp; get updated!</h3>
-                                  <p>Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.</p>
-                                  <br>
+                                <div class="col m-l-20">
+                                    <h4 class="bold">Use <a href="javascript:void(0)">http://dashinotify.com/notifier</a> as the URL of the WebHook.</h4>
+                                    <h5 class="bold">Github</h5>
+                                    <img src="img/setup/repository/github.png" class="img-fluid m-b-10">
+                                    <h5 class="bold">Bitbucket</h5>
+                                    <img src="img/setup/repository/bitbucket.png" class="img-fluid m-b-10">
                                 </div>
                               </div>
                             </div>
@@ -190,6 +194,9 @@
                 </div>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <!-- <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script> -->
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/scripts.js') }}"></script>
     </body>
 </html>

@@ -1,4 +1,5 @@
 (function() {
+    console.log("ready");
     const AUTH_BG = document.querySelector(".auth-bg");
     const WINDOWS_WIDTH = window.innerWidth;
     const WINDOW_HEIGHT = window.innerHeight;
@@ -10,6 +11,11 @@
         return;
     }
 
-    AUTH_BG.remove()
+    AUTH_BG.remove();
+
+    $(".intro-arrow").mouseover(function(){
+        console.log("hola");
+        $(this).removeClass("animated");
+    })
 
 })();
