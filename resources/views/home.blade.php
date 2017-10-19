@@ -13,6 +13,13 @@
                             <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack
                                 Incoming Webhook</a></p>
 
+
+                        @if (session('message'))
+                            <div class="alert alert-success">
+                                {{ session('message') }}
+                            </div>
+                        @endif
+                        
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
