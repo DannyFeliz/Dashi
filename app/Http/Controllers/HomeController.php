@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Notification;
 use App\SlackToken;
 use App\User;
-use App\NotificationSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
