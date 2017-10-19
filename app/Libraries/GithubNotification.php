@@ -106,7 +106,7 @@ class GithubNotification
      */
     public function pushOnOpenPullRequest()
     {
-        if (!$this->notification["pull_request"]["state"] == "open") {
+        if ($this->notification["pull_request"]["state"] != "open") {
             echo "This pull request is not open";
             return;
         }
