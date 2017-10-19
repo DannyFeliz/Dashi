@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notification;
 class MentionInComment extends Notification
 {
     public $notification;
-    public $client;
 
     /**
      * Create a new notification instance.

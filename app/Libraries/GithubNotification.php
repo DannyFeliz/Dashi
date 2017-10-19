@@ -3,6 +3,7 @@
 namespace App\Libraries;
 
 
+use App\Notifications\PushOnOpenPullRequest;
 use App\Notifications\RequestChanges;
 use App\Notifications\RequestReview;
 use App\Notifications\MentionInComment;
@@ -12,10 +13,12 @@ use App\User;
 class GithubNotification
 {
     public $notification;
+    public $pushOnOpenPullRequestData = [];
     public $actions = [
         "reviewRequested" => false,
         "changesRequested" => false,
         "mentionedInComment" => false,
+        "pushOnOpenPullRequest" => false,
     ];
 
     /**
@@ -38,7 +41,7 @@ class GithubNotification
         // if the given endpoint exists, otherwise is an event that has been triggered
         if (!array_key_exists("action", $this->notification)) return;
 
-        $validActions = ["review_requested", "submitted", "created"];
+        $validActions = ["review_requested", "submitted", "created", "synchronize"];
 
         $action = $this->notification["action"];
         if (!in_array($action, $validActions)) {
@@ -51,6 +54,7 @@ class GithubNotification
         $this->actions["changesRequested"] = $action === "submitted" &&
                                              $this->notification["review"]['state'] === "changes_requested";
         $this->actions["mentionedInComment"] = $action === "created";
+        $this->actions["pushOnOpenPullRequest"] = $action === "synchronize";
 
         if ($this->actions["reviewRequested"]) {
             $this->reviewRequested();
@@ -58,6 +62,8 @@ class GithubNotification
             $this->changesRequested();
         } else if ($this->actions["mentionedInComment"]) {
             $this->mentionInComment();
+        } else if ($this->actions["pushOnOpenPullRequest"]) {
+            $this->pushOnOpenPullRequest();
         }
     }
 
@@ -96,6 +102,28 @@ class GithubNotification
     }
 
     /**
+     * Notify to all reviewer in the open pull request
+     */
+    public function pushOnOpenPullRequest()
+    {
+        if ($this->notification["pull_request"]["state"] != "open") {
+            echo "This pull request is not open";
+            return;
+        }
+
+        $reviewers = $this->notification["pull_request"]["requested_reviewers"];
+        if (count($reviewers)) {
+            foreach ($reviewers as $reviewer) {
+                $this->pushOnOpenPullRequestData = $this->pushOnOpenPullRequestData($reviewer);
+
+                $this->notify($reviewer["login"]);
+            }
+        } else {
+            echo "There are no reviewers in this Pull Request.\n";
+        }
+    }
+
+    /**
      * Dispatch the corresponding notification
      *
      * @param string $username
@@ -111,6 +139,8 @@ class GithubNotification
                 $notification = new RequestChanges($this->requestChangesData());
             } else if ($this->actions["mentionedInComment"]) {
                 $notification = new MentionInComment($this->mentionInCommentData());
+            } else if ($this->actions["pushOnOpenPullRequest"]) {
+                $notification = new PushOnOpenPullRequest($this->pushOnOpenPullRequestData);
             } else {
                 return;
             }
@@ -166,6 +196,24 @@ class GithubNotification
             "url" => $this->notification["comment"]["html_url"],
             "repository" => $this->notification["repository"]["name"],
             "comment" => $this->notification["comment"]["body"],
+            "from" => "Github"
+        ];
+    }
+
+    /**
+     * Constructs the data required for the push on open pull request notification
+     *
+     * @param array $reviewer
+     * @return array
+     */
+    public function pushOnOpenPullRequestData(array $reviewer)
+    {
+        return [
+            "username" => $this->notification["pull_request"]["user"]["login"],
+            "reviewer" => $reviewer["login"],
+            "title" => $this->notification["pull_request"]["title"],
+            "url" => $this->notification["pull_request"]["html_url"],
+            "repository" => $this->notification["repository"]["name"],
             "from" => "Github"
         ];
     }
