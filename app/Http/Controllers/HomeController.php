@@ -32,7 +32,14 @@ class HomeController extends Controller
     public function save(Request $request)
     {
         $this->validate($request, [
-            "token" => "required"
+            "token" => [
+                "required",
+                "regex:/https:\/\/hooks\.slack\.com\/services\/\w{9}\/\w{9}\/\w{24}/"
+            ]
+        ],
+        [
+            "required" => "The Slack Webhook URL is required",
+            "regex" => "The Slack Webhook URL format is invalid",
         ]);
 
         if ($request->id) {
