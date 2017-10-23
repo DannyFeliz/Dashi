@@ -5,8 +5,7 @@ namespace App\Notifications;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 
-
-class RequestChanges extends Notification
+class PushOnOpenPullRequest extends Notification
 {
     public $notification;
 
@@ -41,12 +40,10 @@ class RequestChanges extends Notification
 
         return (new SlackMessage)
             ->from(env("APP_NAME"))
-            ->image(env("APP_URL") . "/img/dashi-danger.png")
-            ->error()
-            ->content(":hammer_and_wrench: *{$notification["username"]}* wants you to make some changes to this Pull Request.")
+            ->image(env("APP_URL") . "/img/dashi-info.png")
+            ->content(":arrow_up: *{$notification['username']}* updated a Pull Request where you are a Reviewer.")
             ->attachment(function ($attachment) use ($notification) {
                 $attachment->title($notification["title"], $notification["url"])
-                    ->content(":crossed_swords: Make the changes and update the Pull Request.")
                     ->fields($notification["fields"]);
             });
     }
@@ -55,9 +52,7 @@ class RequestChanges extends Notification
     {
         return [
             "Repository" => $this->notification["repository"],
-            "From" => $this->notification["from"],
-            "Comment" => $this->notification["comment"],
+            "From" => $this->notification["from"]
         ];
     }
-
 }
