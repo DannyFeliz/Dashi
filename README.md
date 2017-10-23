@@ -102,7 +102,7 @@ Make sure you have installed PHP and MySQL/MariaDB.
 Create the database:
 
 ```sql
-CREATE DATABASE homestead
+CREATE DATABASE dashi
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 ```
