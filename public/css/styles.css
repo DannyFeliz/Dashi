@@ -1,3 +1,135 @@
+.template-login nav, .template-register nav {
+    display: none;
+}
+
+.header.md-header {
+    height: 60px;
+}
+
+.header.dark {
+    background-color: rgba(0,0,0,0.87);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    z-index: 800;
+    background-color: #fff;
+    -webkit-transition: background 0.4s ease,height 0.4s ease;
+    transition: background 0.4s ease,height 0.4s ease;
+}
+
+.header>.pull-right, .header .pull-left {
+    position: relative;
+}
+
+.menu-content[data-pages-direction="slideRight"], .menu-content[data-pages-direction="pushRight"] {
+    right: 0;
+}
+
+.header.md-header .header-inner {
+    line-height: 60px;
+}
+
+.inline-logo {
+    padding: 12px;
+}
+
+.header .header-inner {
+    line-height: 60px;
+    width: 100%;
+    -webkit-transition: line-height 0.4s ease;
+    transition: line-height 0.4s ease;
+}
+
+.header .menu {
+    margin: 0;
+    display: inline-block;
+}
+
+.header .menu>li {
+    display: inline-block;
+    list-style: none;
+    font-size: 13px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.header.dark .menu>li>a:not(.btn).active {
+    opacity: 1;
+}
+
+ul>li, ol>li {
+    padding-left: 3px;
+    line-height: 24px;
+}
+
+.header .menu>li>a {
+    position: relative;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    padding-right: 21px;
+    display: block;
+}
+
+.header .menu>li.open>a {
+    opacity: 1;
+}
+
+.header.dark .menu>li>a:not(.btn) {
+    color: #ffffff;
+    opacity: 0.5;
+}
+
+.header .menu>li>.horizontal {
+    margin: 0;
+    margin-top: 15px;
+    padding: 0;
+    position: fixed;
+    background-color: #fff;
+    list-style: none;
+    display: none;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.header .menu>li>.horizontal .container {
+    overflow: hidden;
+    border-right: 1px solid #e6e6e6;
+}
+
+.header .menu>li>.horizontal ul {
+    white-space: nowrap;
+    padding-left: 0;
+}
+
+.header .menu>li>.horizontal ul li {
+    margin: 2px 9px 6px 9px;
+    display: inline-block;
+}
+
+.dropdown-default.open .dropdown-menu {
+    opacity: 1;
+    transform: scale(1,1);
+    z-index: 700;
+}
+
+.dropdown-default.open .dropdown-toggle {
+    color: black !important;
+}
+
+.dropdown-default.open .dropdown-menu .dropdown-item {
+    visibility: visible;
+}
+
+nav .dropdown-item.active, nav .dropdown-item:active {
+    background-color: transparent !important;
+}
+
 html, body {
     background-color: #f5f5f5;
     color: #636b6f;
@@ -143,6 +275,10 @@ h6 {
     line-height: 34px;
 }
 
+.setup .nav-tabs-simple>li>a:after {
+    background-color: #48b0f7;
+}
+
 .intro-arrow {
     position: absolute;
     bottom: 20px;
@@ -152,4 +288,8 @@ h6 {
 
 .intro-arrow p {
     font-size: 14px;
+}
+
+.container.main-content {
+    padding-top: 80px;
 }

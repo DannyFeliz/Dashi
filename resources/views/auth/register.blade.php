@@ -13,7 +13,7 @@
         <div class="text-center">
             <img src="{{ asset('img/dashi-logo.png') }}" alt="logo" data-src="{{ asset('img/dashi-logo.png') }}" data-src-retina="{{ asset('img/dashi-logo.png') }}" width="155" height="132">
         </div>
-      <p class="p-t-20 text-center">Sign up</p>
+      <p class="p-t-20 text-center">Sign up or <a href="{{ url('/login') }}">Log In</a></p>
       <!-- START Login Form -->
       <form id="form-signup" class="p-t-15" role="form" method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
