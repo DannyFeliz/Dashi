@@ -95,7 +95,7 @@ Use [http://dashinotify.com/notifier](http://dashinotify.com/notifier) as the UR
 ![bitbucket](https://i.imgur.com/7GwB4LX.png)
 
 
-# Instalation 
+# Installation 
 
 Make sure you have installed PHP and MySQL/MariaDB.
 
