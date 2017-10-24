@@ -49,7 +49,7 @@ php artisan db:seed
 
 In order to start using Dashi in your daily routine, you need to: 
 
-1. Generate a Slack Incoming WebHook and copy the URL.
+1. Generate a [Slack Incoming WebHooks](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) and copy the URL.
 2. Signup at [Dashi](http://dashinotify.com/register)
 3. Type your Github or Bitbucket username
 4. Paste the copied Slack Webook URL
