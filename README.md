@@ -127,6 +127,9 @@ composer update
 # generate the app key
 Run php artisan key:generate
 
+# generate optimized class loader
+php artisan optimize
+
 # run the migrations
 php artisan migrate
 
