@@ -24,15 +24,6 @@
                     <a class="d-flex" href="{{ url('/') }}"><img src="/img/dashi-inline-logo.png" width="150" height="34" data-src-retina="assets/images/logo_white_2x.png" alt=""></a>
                  </div>
               </div>
-              <!-- <div class="pull-right">
-                 <div class="header-inner">
-                    <div class="visible-sm-inline visible-xs-inline menu-toggler pull-right p-l-10" data-pages="header-toggle" data-pages-element="#header">
-                       <div class="one"></div>
-                       <div class="two"></div>
-                       <div class="three"></div>
-                    </div>
-                 </div>
-              </div> -->
               <div class="pull-right menu-content clearfix" data-pages="menu-content" data-pages-direction="slideRight" id="header">
                  <div class="header-inner">
                      <ul class="menu">
@@ -68,9 +59,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <!-- <script src="{{ asset('js/pages.min.js') }}"></script> -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
