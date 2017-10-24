@@ -9,6 +9,8 @@
 
     // Start Auth BG api call/initialize
     const AUTH_BG = document.querySelector(".auth-bg");
+    if (!AUTH_BG) return;
+    
     const WINDOWS_WIDTH = window.innerWidth;
     const WINDOW_HEIGHT = window.innerHeight;
     const UNSPLASH_API = "https://source.unsplash.com/category/technology/";
