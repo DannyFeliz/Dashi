@@ -93,3 +93,47 @@ Use [http://dashinotify.com/notifier](http://dashinotify.com/notifier) as the UR
 
 > ### Bitbucket
 ![bitbucket](https://i.imgur.com/7GwB4LX.png)
+
+
+# Installation 
+
+Make sure you have installed PHP and MySQL/MariaDB.
+
+Create the database:
+
+```sql
+CREATE DATABASE dashi
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+```
+Install [Composer](https://getcomposer.org/download/).
+
+Now, in your terminal: 
+
+```bash
+# cd /home or wherever you want to install it
+cd /home
+
+# clone the project
+git clone https://github.com/DannyFeliz/Dashi.git
+cd Dashi
+
+# Copy the .env.example file as .env and edit with your local settings
+cp .env.example .env
+
+# run composer
+composer update
+
+# generate the app key
+Run php artisan key:generate
+
+# run the migrations
+php artisan migrate
+
+# run the seeding methods
+php artisan db:seed
+
+```
+
+Now you can start collaborating with Dashi. :)
+
