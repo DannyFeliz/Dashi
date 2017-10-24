@@ -1,25 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Settings</div>
-
-                    <div class="panel-body">
-                        <p>Configure your <a target="_blank" href="https://github.com">Github</a> and
-                            <a target="_blank" href="https://bitbucket.com">Bitbucket</a> username also create a
-                            <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack
-                                Incoming Webhook</a></p>
-
+<div class="container main-content">
+    <div class="row">
+        <div class="ml-auto col-md-8 mr-auto">
+            <h2 class="section-title">Settings</h2>
+            <div class="card card-default">
+                <div class="card-block">
+                    <p>Configure your <a target="_blank" href="https://github.com">Github</a> and
+                        <a target="_blank" href="https://bitbucket.com">Bitbucket</a> username also create a
+                        <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Incoming Webhook</a>
+                    </p>
 
                         @if (session('message'))
                             <div class="alert alert-success">
                                 {{ session('message') }}
                             </div>
                         @endif
-                        
+
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -62,7 +60,7 @@
                                        placeholder="https://hooks.slack.com/services/xxxxxxxxx/xxxxxxxxx/xxxxxxxxxxxxxxxxxxxxxxxx">
                             </div>
 
-                            <button type="submit" class="btn btn-default">Save</button>
+                        <button type="submit" class="btn btn-complete">Save</button>
                         </form>
                     </div>
                 </div>

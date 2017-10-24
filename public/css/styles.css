@@ -1,8 +1,295 @@
+.template-login nav, .template-register nav {
+    display: none;
+}
+
+.header.md-header {
+    height: 60px;
+}
+
+.header.dark {
+    background-color: rgba(0,0,0,0.87);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    z-index: 800;
+    background-color: #fff;
+    -webkit-transition: background 0.4s ease,height 0.4s ease;
+    transition: background 0.4s ease,height 0.4s ease;
+}
+
+.header>.pull-right, .header .pull-left {
+    position: relative;
+}
+
+.menu-content[data-pages-direction="slideRight"], .menu-content[data-pages-direction="pushRight"] {
+    right: 0;
+}
+
+.header.md-header .header-inner {
+    line-height: 60px;
+}
+
+.inline-logo {
+    padding: 12px;
+}
+
+.header .header-inner {
+    line-height: 60px;
+    width: 100%;
+    -webkit-transition: line-height 0.4s ease;
+    transition: line-height 0.4s ease;
+}
+
+.header .menu {
+    margin: 0;
+    display: inline-block;
+}
+
+.header .menu>li {
+    display: inline-block;
+    list-style: none;
+    font-size: 13px;
+    margin-right: 12px;
+    vertical-align: middle;
+}
+
+.header.dark .menu>li>a:not(.btn).active {
+    opacity: 1;
+}
+
+ul>li, ol>li {
+    padding-left: 3px;
+    line-height: 24px;
+}
+
+.header .menu>li>a {
+    position: relative;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    padding-right: 21px;
+    display: block;
+}
+
+.header .menu>li.open>a {
+    opacity: 1;
+}
+
+.header.dark .menu>li>a:not(.btn) {
+    color: #ffffff;
+    opacity: 0.5;
+}
+
+.header .menu>li>.horizontal {
+    margin: 0;
+    margin-top: 15px;
+    padding: 0;
+    position: fixed;
+    background-color: #fff;
+    list-style: none;
+    display: none;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.header .menu>li>.horizontal .container {
+    overflow: hidden;
+    border-right: 1px solid #e6e6e6;
+}
+
+.header .menu>li>.horizontal ul {
+    white-space: nowrap;
+    padding-left: 0;
+}
+
+.header .menu>li>.horizontal ul li {
+    margin: 2px 9px 6px 9px;
+    display: inline-block;
+}
+
+.dropdown-default.open .dropdown-menu {
+    opacity: 1;
+    transform: scale(1,1);
+    z-index: 700;
+}
+
+.dropdown-default.open .dropdown-toggle {
+    color: black !important;
+}
+
+.dropdown-default.open .dropdown-menu .dropdown-item {
+    visibility: visible;
+}
+
+nav .dropdown-item.active, nav .dropdown-item:active {
+    background-color: transparent !important;
+}
+
+html, body {
+    background-color: #f5f5f5;
+    color: #636b6f;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    height: 100vh;
+    margin: 0;
+}
+
+.intro {
+    background-color: white;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 60px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.no-style{
+    text-decoration: none;
+}
+
+p{
+    font-family: sans-serif;
+}
+
+#app {
+    height: 100%;
+}
+
 .logo img {
-  width: 100%;
+  width: 50%;
 }
 
 .logo-inline {
     width: 190px;
     padding: 8px 20px;
+}
+
+.login-wrapper {
+    background-color: white;
+}
+
+.login-wrapper .bg-pic>img {
+    opacity: 1;
+}
+
+.login-wrapper .login-container {
+    opacity: 0.95;
+}
+
+.section {
+    padding: 70px 0px;
+}
+
+.section-title {
+    border-bottom: 1px solid #d0d0d0;
+    padding-bottom: 10px;
+}
+
+h6 {
+    font-weight: 400;
+}
+
+
+/* Examples */
+
+.examples [class^="col"] {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.examples img {
+    padding: 15px;
+    background-color: white;
+}
+
+
+/* Support */
+
+.support {
+    background-color: white;
+}
+
+.support p {
+    margin-bottom: 0;
+}
+
+.support .table tbody tr td {
+    padding: 15px !important;
+}
+
+.support .table {
+    margin-top: 20px;
+}
+
+.setup {
+    font-family: arial;
+}
+
+.setup {
+    font-size: 18px;
+}
+
+.setup #dashi li {
+    line-height: 34px;
+}
+
+.setup .nav-tabs-simple>li>a:after {
+    background-color: #48b0f7;
+}
+
+.intro-arrow {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    font-size: 35px;
+}
+
+.intro-arrow p {
+    font-size: 14px;
+}
+
+.container.main-content {
+    padding-top: 80px;
 }
