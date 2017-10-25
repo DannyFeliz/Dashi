@@ -32,7 +32,7 @@ cp .env.example .env
 composer update
 
 # generate the app key
-Run php artisan key:generate
+php artisan key:generate
 
 # generate optimized class loader
 php artisan optimize
