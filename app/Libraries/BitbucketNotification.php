@@ -2,7 +2,6 @@
 
 namespace App\Libraries;
 
-
 use App\Notifications\RequestReview;
 use App\SlackToken;
 use App\User;
@@ -11,9 +10,9 @@ class BitbucketNotification
 {
     public $notification;
 
-
     /**
-     * GithubNotification constructor.
+     * GithubNotifier constructor.
+     *
      * @param $notification
      */
     public function __construct($notification)
@@ -22,23 +21,22 @@ class BitbucketNotification
         $this->run();
     }
 
-
     public function run()
     {
-        $action = $this->notification->header("X-Event-Key");
-        $validActions = ["pullrequest:created"];
+        $action = $this->notification->header('X-Event-Key');
+        $validActions = ['pullrequest:created'];
 
         if (!in_array($action, $validActions)) {
             echo "The action '{$action}' is not valid. Only 'pullrequest:created' action is supported at this moment.\n";
+
             return;
         }
 
-        $reviewers = $this->notification["pullrequest"]["reviewers"];
+        $reviewers = $this->notification['pullrequest']['reviewers'];
         foreach ($reviewers as $reviewer) {
-            $this->notify($reviewer["username"]);
+            $this->notify($reviewer['username']);
         }
     }
-
 
     /**
      * Trigger the notification
@@ -47,9 +45,9 @@ class BitbucketNotification
      */
     public function notify($username)
     {
-        $slackToken = SlackToken::where("bitbucket_username", $username)->first();
+        $slackToken = SlackToken::where('bitbucket_username', $username)->first();
         if ($slackToken) {
-            $user = User::where("id", $slackToken->user_id)->first();
+            $user = User::where('id', $slackToken->user_id)->first();
             $user->notify(new RequestReview($this->requestReviewData()));
         }
     }
@@ -62,11 +60,11 @@ class BitbucketNotification
     public function requestReviewData()
     {
         return [
-            "username" => $this->notification["pullrequest"]["author"]["username"],
-            "title" => $this->notification["pullrequest"]["title"],
-            "url" =>  $this->notification["pullrequest"]["links"]["html"]["href"],
-            "repository" => $this->notification["pullrequest"]["destination"]["repository"]["name"],
-            "from" => "Bitbucket"
+            'username' => $this->notification['pullrequest']['author']['username'],
+            'title' => $this->notification['pullrequest']['title'],
+            'url' => $this->notification['pullrequest']['links']['html']['href'],
+            'repository' => $this->notification['pullrequest']['destination']['repository']['name'],
+            'from' => 'Bitbucket',
         ];
     }
 }
