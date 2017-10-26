@@ -14,12 +14,12 @@ class GithubNotifier
     /**
      * GithubNotifier constructor.
      *
-     * @param $notification
      * @param mixed $request
      */
     public function __construct($request)
     {
-        $this->parser = new GithubParser(json_decode($request->toArray()['payload'], true));
+        $payload = $request->toArray()['payload'];
+        $this->parser = new GithubParser(json_decode($payload, true));
         $this->run();
     }
 

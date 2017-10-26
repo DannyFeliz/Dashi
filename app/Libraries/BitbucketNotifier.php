@@ -5,66 +5,59 @@ namespace App\Libraries;
 use App\Notifications\RequestReview;
 use App\SlackToken;
 use App\User;
+use App\Libraries\Parser\BitbucketParser;
+use App\Libraries\Slack\SlackAttachment;
+use App\Libraries\Slack\SlackNotifier;
 
-class BitbucketNotier
+class BitbucketNotifier
 {
-    public $notification;
+    private $parser;
 
     /**
-     * GithubNotifier constructor.
+     * BitbucketNotifier constructor.
      *
-     * @param $notification
+     * @param $request
      */
-    public function __construct($notification)
+    public function __construct($request)
     {
-        $this->notification = $notification;
+        $this->parser = new BitbucketParser($request);
         $this->run();
     }
 
     public function run()
     {
-        $action = $this->notification->header('X-Event-Key');
-        $validActions = ['pullrequest:created'];
+        if (!$this->parser->isASupportedActionRequest()) {
+            $actionsList = implode("', '", $this->parser->getSupportedActionRequest());
 
-        if (!in_array($action, $validActions)) {
-            echo "The action '{$action}' is not valid. Only 'pullrequest:created' action is supported at this moment.\n";
+            echo "Only '{$actionsList}' actions are supported at this moment.\n";
 
             return;
         }
 
-        $reviewers = $this->notification['pullrequest']['reviewers'];
-        foreach ($reviewers as $reviewer) {
-            $this->notify($reviewer['username']);
+        if (!$this->parser->parse()) {
+            echo 'We werent able to recognize this event :(';
+
+            return;
         }
+
+        $this->notify($this->parser->getSuscribers(), $this->parser->getAttachment());
     }
 
     /**
-     * Trigger the notification
+     * Dispatch the corresponding notification
      *
-     * @param string $username
+     * @param array $suscribers
+     * @param mixed $attachment
      */
-    public function notify($username)
+    public function notify(array $suscribers, SlackAttachment $attachment)
     {
-        $slackToken = SlackToken::where('bitbucket_username', $username)->first();
-        if ($slackToken) {
-            $user = User::where('id', $slackToken->user_id)->first();
-            $user->notify(new RequestReview($this->requestReviewData()));
+        foreach ($suscribers as $suscriber) {
+            $slackToken = SlackToken::where('bitbucket_username', $suscriber)->first();
+            if ($slackToken) {
+                $notifier = new SlackNotifier($slackToken);
+                $notifier->send($attachment);
+            }
         }
     }
 
-    /**
-     * Constructs the data required for the request review notification
-     *
-     * @return array
-     */
-    public function requestReviewData()
-    {
-        return [
-            'username' => $this->notification['pullrequest']['author']['username'],
-            'title' => $this->notification['pullrequest']['title'],
-            'url' => $this->notification['pullrequest']['links']['html']['href'],
-            'repository' => $this->notification['pullrequest']['destination']['repository']['name'],
-            'from' => 'Bitbucket',
-        ];
-    }
 }

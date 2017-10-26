@@ -33,13 +33,13 @@ class GithubParser implements ParserInterface
      *
      * @param $request
      */
-    public function __construct(array $request)
+    public function __construct($request)
     {
         $this->request = $request;
         $this->attachment = new SlackAttachment();
     }
 
-    public function parse()
+    public function parse(): bool
     {
         if ($this->setEvent()) {
             $this->setSuscribers();
@@ -80,17 +80,17 @@ class GithubParser implements ParserInterface
         return $this->suscribers;
     }
 
-    public function isAnActionRequest()
+    public function isAnActionRequest(): bool
     {
         return array_key_exists('action', $this->request);
     }
 
-    public function getSupportedActionRequest()
+    public function getSupportedActionRequest(): array
     {
         return $this->supportedActionRequest;
     }
 
-    public function isASupportedActionRequest()
+    public function isASupportedActionRequest(): bool
     {
         return in_array($this->request['action'], $this->getSupportedActionRequest());
     }
@@ -132,7 +132,7 @@ class GithubParser implements ParserInterface
                          ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
-    private function setEvent()
+    private function setEvent(): bool
     {
         foreach ($this->supportedEvents as $event => $isThisEvent) {
             if ($this->{$isThisEvent}()) {
@@ -145,22 +145,22 @@ class GithubParser implements ParserInterface
         return false;
     }
 
-    private function isReviewRequested()
+    private function isReviewRequested(): bool
     {
         return 'review_requested' === $this->request['action'];
     }
 
-    private function isChangesRequested()
+    private function isChangesRequested(): bool
     {
         return 'submitted' === $this->request['action'] && $this->request['review']['state'] === 'changes_requested';
     }
 
-    private function isMentionedInComment()
+    private function isMentionedInComment(): bool
     {
         return 'created' === $this->request['action'];
     }
 
-    private function isPushOnOpenPullRequest()
+    private function isPushOnOpenPullRequest(): bool
     {
         return 'synchronize' === $this->request['action'] && $this->request['pull_request']['state'] == 'open';
     }
