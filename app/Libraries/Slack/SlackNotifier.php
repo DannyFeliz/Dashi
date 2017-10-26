@@ -28,8 +28,4 @@ class SlackNotifier
             'json' => ['attachments' => $attachments],
         ]);
     }
-
-    private function run()
-    {
-    }
 }
