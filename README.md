@@ -62,4 +62,4 @@ See the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[MIT](LICENSE.txt)
