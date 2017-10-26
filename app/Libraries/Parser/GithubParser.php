@@ -116,7 +116,7 @@ class GithubParser implements ParserInterface
                          ->setFields([
                             'title' => 'File(s) changed',
                             'value' => $this->request['pull_request']['changed_files'],
-                            'short' => false,
+                            'short' => true,
                          ])
                          ->setFields([
                             'title' => 'Repository',
@@ -129,7 +129,7 @@ class GithubParser implements ParserInterface
                             'short' => true,
                          ])
                          ->setFooter('Dashi')
-                         ->setFooterIcon(env('APP_URL').'/img/dashi-success.png');
+                         ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function setEvent()
@@ -230,7 +230,7 @@ class GithubParser implements ParserInterface
                             'short' => true,
                          ])
                          ->setFooter('Dashi')
-                         ->setFooterIcon(env('APP_URL').'/img/dashi-warning.png');
+                         ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function buildSlackAttachmentFromMIC()
@@ -262,7 +262,7 @@ class GithubParser implements ParserInterface
                             'short' => true,
                          ])
                          ->setFooter('Dashi')
-                         ->setFooterIcon(env('APP_URL').'/img/dashi-info.png');
+                         ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function buildSlackAttachmentFromPOOPR()
@@ -292,6 +292,6 @@ class GithubParser implements ParserInterface
                             'short' => true,
                          ])
                          ->setFooter('Dashi')
-                         ->setFooterIcon(env('APP_URL').'/img/dashi-info.png');
+                         ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 }
