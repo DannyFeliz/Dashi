@@ -51,17 +51,17 @@ class GithubParser implements ParserInterface
         return false;
     }
 
-    public function getEvent()
+    public function getEvent(): string
     {
         return $this->event;
     }
 
-    public function getAttachment()
+    public function getAttachment(): SlackAttachment
     {
         return $this->attachment;
     }
 
-    public function getRawRequest()
+    public function getRawRequest(): array
     {
         return $this->request;
     }
@@ -75,7 +75,7 @@ class GithubParser implements ParserInterface
         }
     }
 
-    public function getSuscribers()
+    public function getSuscribers(): array
     {
         return $this->suscribers;
     }
