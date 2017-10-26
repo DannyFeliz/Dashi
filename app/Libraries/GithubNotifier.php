@@ -7,19 +7,19 @@ use App\Libraries\Slack\SlackAttachment;
 use App\Libraries\Slack\SlackNotifier;
 use App\SlackToken;
 
-class GithubNotification
+class GithubNotifier
 {
     private $parser;
 
     /**
-     * GithubNotification constructor.
+     * GithubNotifier constructor.
      *
-     * @param $notification
      * @param mixed $request
      */
     public function __construct($request)
     {
-        $this->parser = new GithubParser(json_decode($request->toArray()['payload'], true));
+        $payload = $request->toArray()['payload'];
+        $this->parser = new GithubParser(json_decode($payload, true));
         $this->run();
     }
 
@@ -45,19 +45,19 @@ class GithubNotification
             return;
         }
 
-        $this->notify($this->parser->getSuscribers(), $this->parser->getAttachment());
+        $this->notify($this->parser->getSubscribers(), $this->parser->getAttachment());
     }
 
     /**
      * Dispatch the corresponding notification
      *
-     * @param array $suscribers
+     * @param array $subscribers
      * @param mixed $attachment
      */
-    public function notify(array $suscribers, SlackAttachment $attachment)
+    public function notify(array $subscribers, SlackAttachment $attachment)
     {
-        foreach ($suscribers as $suscriber) {
-            $slackToken = SlackToken::where('github_username', $suscriber)->first();
+        foreach ($subscribers as $subscriber) {
+            $slackToken = SlackToken::where('github_username', $subscriber)->first();
             if ($slackToken) {
                 $notifier = new SlackNotifier($slackToken);
                 $notifier->send($attachment);

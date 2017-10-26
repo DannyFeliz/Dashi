@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Libraries\BitbucketNotification;
-use App\Libraries\GithubNotification;
+use App\Libraries\BitbucketNotifier;
+use App\Libraries\GithubNotifier;
 use App\VersionControlSystem;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -29,10 +29,10 @@ class NotifierController
             return;
         }
 
-        if ($vcs->name == 'Github') {
-            new GithubNotification($request);
+        if ('Github' == $vcs->name) {
+            new GithubNotifier($request);
         } elseif ('Bitbucket' == $vcs->name) {
-            new BitbucketNotification($request);
+            new BitbucketNotifier($request);
         }
 
         echo 'Everything went well with '.$vcs->name.'.';
