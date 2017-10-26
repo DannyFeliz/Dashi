@@ -17,7 +17,6 @@ class SlackNotifier
     public function __construct(SlackToken $token)
     {
         $this->token = $token->token;
-        $this->run();
     }
 
     public function send(SlackAttachment $attachment)
