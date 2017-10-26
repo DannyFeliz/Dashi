@@ -18,7 +18,7 @@ interface ParserInterface
 
     public function buildSlackAttachment();
 
-    public function getSuscribers(): array;
+    public function getSubscribers(): array;
 
     public function isAnActionRequest(): bool;
 

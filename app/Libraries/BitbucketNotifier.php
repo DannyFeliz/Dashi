@@ -40,19 +40,19 @@ class BitbucketNotifier
             return;
         }
 
-        $this->notify($this->parser->getSuscribers(), $this->parser->getAttachment());
+        $this->notify($this->parser->getSubscribers(), $this->parser->getAttachment());
     }
 
     /**
      * Dispatch the corresponding notification
      *
-     * @param array $suscribers
+     * @param array $subscribers
      * @param mixed $attachment
      */
-    public function notify(array $suscribers, SlackAttachment $attachment)
+    public function notify(array $subscribers, SlackAttachment $attachment)
     {
-        foreach ($suscribers as $suscriber) {
-            $slackToken = SlackToken::where('bitbucket_username', $suscriber)->first();
+        foreach ($subscribers as $subscriber) {
+            $slackToken = SlackToken::where('bitbucket_username', $subscriber)->first();
             if ($slackToken) {
                 $notifier = new SlackNotifier($slackToken);
                 $notifier->send($attachment);

@@ -10,7 +10,7 @@ class GithubParser implements ParserInterface
     private $request;
     private $event;
     private $attachment;
-    private $suscribers = [];
+    private $subscribers = [];
     private $supportedEvents = [
         'reviewRequested' => 'isReviewRequested',
         'changesRequested' => 'isChangesRequested',
@@ -42,7 +42,7 @@ class GithubParser implements ParserInterface
     public function parse(): bool
     {
         if ($this->setEvent()) {
-            $this->setSuscribers();
+            $this->setSubscribers();
             $this->buildSlackAttachment();
 
             return true;
@@ -75,9 +75,9 @@ class GithubParser implements ParserInterface
         }
     }
 
-    public function getSuscribers(): array
+    public function getSubscribers(): array
     {
-        return $this->suscribers;
+        return $this->subscribers;
     }
 
     public function isAnActionRequest(): bool
@@ -165,34 +165,34 @@ class GithubParser implements ParserInterface
         return 'synchronize' === $this->request['action'] && $this->request['pull_request']['state'] == 'open';
     }
 
-    private function setSuscribers()
+    private function setSubscribers()
     {
-        $setterName = "setSuscribers{$this->aliases[$this->event]}";
+        $setterName = "setSubscribers{$this->aliases[$this->event]}";
 
         if (method_exists($this, $setterName)) {
             call_user_func([$this, $setterName]);
         }
     }
 
-    private function setSuscribersRR()
+    private function setSubscribersRR()
     {
-        $this->suscribers[] = $this->request['sender']['login'];
+        $this->subscribers[] = $this->request['sender']['login'];
     }
 
-    private function setSuscribersCR()
+    private function setSubscribersCR()
     {
-        $this->suscribers[] = $this->request['pull_request']['user']['login'];
+        $this->subscribers[] = $this->request['pull_request']['user']['login'];
     }
 
-    private function setSuscribersMIC()
+    private function setSubscribersMIC()
     {
-        $this->suscribers = Utils::extractUsernames($this->request['comment']['body']);
+        $this->subscribers = Utils::extractUsernames($this->request['comment']['body']);
     }
 
-    private function setSuscribersPOOPR()
+    private function setSubscribersPOOPR()
     {
         foreach ($this->request['pull_request']['requested_reviewers'] as $reviewers) {
-            $this->suscribers[] = $reviewers['login'];
+            $this->subscribers[] = $reviewers['login'];
         }
     }
 

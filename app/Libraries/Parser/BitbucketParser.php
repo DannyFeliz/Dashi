@@ -10,7 +10,7 @@ class BitbucketParser implements ParserInterface
     private $request;
     private $event;
     private $attachment;
-    private $suscribers = [];
+    private $subscribers = [];
     private $supportedEvents = [
         'reviewRequested' => 'isReviewRequested',
     ];
@@ -35,7 +35,7 @@ class BitbucketParser implements ParserInterface
     public function parse(): bool
     {
         if ($this->setEvent()) {
-            $this->setSuscribers();
+            $this->setSubscribers();
             $this->buildSlackAttachment();
 
             return true;
@@ -68,9 +68,9 @@ class BitbucketParser implements ParserInterface
         }
     }
 
-    public function getSuscribers(): array
+    public function getSubscribers(): array
     {
-        return $this->suscribers;
+        return $this->subscribers;
     }
 
     public function isAnActionRequest(): bool
@@ -121,10 +121,10 @@ class BitbucketParser implements ParserInterface
                          ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
-    private function setSuscribersRR()
+    private function setSubscribersRR()
     {
         foreach ($this->request['pullrequest']['reviewers'] as $reviewers) {
-            $this->suscribers[] = $reviewers['username'];
+            $this->subscribers[] = $reviewers['username'];
         }
     }
 
@@ -146,9 +146,9 @@ class BitbucketParser implements ParserInterface
         return true;
     }
 
-    private function setSuscribers()
+    private function setSubscribers()
     {
-        $setterName = "setSuscribers{$this->aliases[$this->event]}";
+        $setterName = "setSubscribers{$this->aliases[$this->event]}";
 
         if (method_exists($this, $setterName)) {
             call_user_func([$this, $setterName]);
