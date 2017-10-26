@@ -17,6 +17,7 @@ class SlackAttachment
     private $footer;
     private $footer_icon;
     private $ts;
+    private $mrkdwn_in;
 
     /**
      * GithubParser constructor.
@@ -26,11 +27,29 @@ class SlackAttachment
     public function __construct()
     {
         $this->ts = time();
-        $this->run();
+        $this->mrkdwn_in = ['text', 'pretext', 'fields'];
     }
 
-    public function run()
+    public function setMrkdwnFields(array $mrkdwnFields)
     {
+        $this->mrkdwn_in = $mrkdwnFields;
+    }
+
+    public function getMrkdwnFields(): array
+    {
+        return $this->mrkdwn_in;
+    }
+
+    public function addMrkdwnField(string $mrkdwnField)
+    {
+        $this->mrkdwn_in[] = $mrkdwnFields;
+    }
+
+    public function removeMrkdwnField(string $mrkdwnField)
+    {
+        if (false !== ($key = array_search($mrkdwnField, $this->mrkdwn_in))) {
+            unset($this->mrkdwn_in[$key]);
+        }
     }
 
     public function setFallback(string $fallback)
