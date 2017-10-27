@@ -1,8 +1,5 @@
 <?php
 
-$header = <<<'EOF'
-EOF;
-
 return PhpCsFixer\Config::create()
     ->setUsingCache(true)
     ->setRiskyAllowed(true)
@@ -13,7 +10,6 @@ return PhpCsFixer\Config::create()
         'dir_constant' => true,
         'ereg_to_preg' => true,
         'general_phpdoc_annotation_remove' => ['expectedException', 'expectedExceptionMessage', 'expectedExceptionMessageRegExp'],
-        'header_comment' => ['header' => $header],
         'heredoc_to_nowdoc' => true,
         'linebreak_after_opening_tag' => true,
         'mb_str_functions' => true,

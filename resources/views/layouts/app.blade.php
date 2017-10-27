@@ -63,6 +63,7 @@
     <script src="{{ asset('js/tether.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/smooth-scroll.min.js') }}"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>

@@ -106,6 +106,7 @@ class GithubParser implements ParserInterface
         $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
 
         $this->attachment->setColor('#36a64f')
+                         ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
                          ->setPretext($pretext)
                          ->setAuthorName($authorName)
                          ->setAuthorLink($authorLink)
@@ -207,6 +208,7 @@ class GithubParser implements ParserInterface
         $text = ':crossed_swords: Make the changes and update the Pull Request.';
 
         $this->attachment->setColor('warning')
+                         ->setIconUrl(env('APP_URL').'/img/dashi-warning.png')
                          ->setPretext($pretext)
                          ->setAuthorName($authorName)
                          ->setAuthorLink($authorLink)
@@ -244,6 +246,7 @@ class GithubParser implements ParserInterface
         $text = ":left_speech_bubble: {$this->request['comment']['body']}";
 
         $this->attachment->setColor('#047bff')
+                         ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
                          ->setPretext($pretext)
                          ->setAuthorName($authorName)
                          ->setAuthorLink($authorLink)
@@ -275,6 +278,7 @@ class GithubParser implements ParserInterface
         $pretext = ':arrow_up: New update in a Pull Request where you are a Reviewer.';
 
         $this->attachment->setColor('#047bff')
+                         ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
                          ->setPretext($pretext)
                          ->setAuthorName($authorName)
                          ->setAuthorLink($authorLink)

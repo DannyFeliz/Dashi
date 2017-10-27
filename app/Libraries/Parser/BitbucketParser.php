@@ -3,7 +3,6 @@
 namespace App\Libraries\Parser;
 
 use App\Libraries\Slack\SlackAttachment;
-use App\Libraries\Utils;
 
 class BitbucketParser implements ParserInterface
 {
@@ -18,7 +17,7 @@ class BitbucketParser implements ParserInterface
         'reviewRequested' => 'RR',
     ];
     private $supportedActionRequest = [
-        'pullrequest:created'
+        'pullrequest:created',
     ];
 
     /**
@@ -94,13 +93,14 @@ class BitbucketParser implements ParserInterface
         $authorDisplayName = $this->request['pullrequest']['author']['display_name'];
         $authorIcon = $this->request['pullrequest']['author']['links']['avatar']['href'];
         $authorLink = $this->request['pullrequest']['author']['links']['html']['href'];
-        $title =  $this->request['pullrequest']['title'];
+        $title = $this->request['pullrequest']['title'];
         $titleLink = $this->request['pullrequest']['links']['html']['href'];
         $pretext = ":microscope: Hey! {$authorDisplayName} needs you to make a `Code Review` to these changes.";
         $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
 
         $this->attachment->setColor('#36a64f')
                          ->setPretext($pretext)
+                         ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
                          ->setAuthorName($authorName)
                          ->setAuthorLink($authorLink)
                          ->setAuthorIcon($authorIcon)
@@ -154,5 +154,4 @@ class BitbucketParser implements ParserInterface
             call_user_func([$this, $setterName]);
         }
     }
-
 }
