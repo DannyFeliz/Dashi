@@ -22,9 +22,8 @@ class SlackNotifier
     public function send(SlackAttachment $attachment)
     {
         $client = new Client();
-        $attachments[] = $attachment->toArray();
         $result = $client->post($this->token, [
-            'json' => ['attachments' => $attachments],
+            'json' => $attachment->getMessage(),
         ]);
     }
 }
