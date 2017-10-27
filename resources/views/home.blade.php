@@ -9,7 +9,7 @@
                 <div class="card-block">
                     <p>Configure your <a target="_blank" href="https://github.com">Github</a> and
                         <a target="_blank" href="https://bitbucket.com">Bitbucket</a> username also create a
-                        <a target="_blank" href="https://mctekk.slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Incoming Webhook</a>
+                        <a target="_blank" href="https://slack.com/apps/A0F7XDUAZ-incoming-webhooks">Slack Incoming Webhook</a>
                     </p>
 
                         @if (session('message'))
