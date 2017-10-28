@@ -4,7 +4,12 @@
 <div class="login-wrapper ">
   <!-- START Login Background Pic Wrapper-->
   <div class="bg-pic">
-    <img class="auth-bg" src="" class="lazy">
+    <!-- <img class="auth-bg" src="" class="lazy"> -->
+    <!-- Alternative 1-->
+    <!-- <img src="https://picsum.photos/700/300/?random" class="lazy"> -->
+    <!-- Alternative 2 -->
+    <img src="https://source.unsplash.com/random/1600x700" class="lazy">
+
   </div>
   <!-- END Login Background Pic Wrapper-->
   <!-- START Login Right Container-->
