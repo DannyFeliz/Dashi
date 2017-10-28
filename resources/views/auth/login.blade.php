@@ -15,7 +15,9 @@
   <div class="login-container bg-white">
     <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
         <div class="text-center">
+          <a href="{{ url('/') }}">
             <img src="{{ asset('img/dashi-logo.png') }}" alt="logo" data-src="{{ asset('img/dashi-logo.png') }}" data-src-retina="{{ asset('img/dashi-logo.png') }}" width="155" height="132">
+          </a>
         </div>
       <p class="p-t-20 text-center">Sign into your Dashi account or <a href="{{ url('/register') }}">Sign Up</a></p>
       <!-- START Login Form -->
