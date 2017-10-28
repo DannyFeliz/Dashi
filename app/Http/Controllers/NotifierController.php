@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Danny
- * Date: 15/06/2017
- * Time: 06:37 PM
- */
 
 namespace App\Http\Controllers;
 
-
-use App\Libraries\BitbucketNotification;
-use App\Libraries\GithubNotification;
+use App\Libraries\BitbucketNotifier;
+use App\Libraries\GithubNotifier;
 use App\VersionControlSystem;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -29,23 +22,24 @@ class NotifierController
     public function index(Request $request)
     {
         $site = $request->header('User-Agent');
-        $site = explode("/", $site)[0];
+        $site = current(explode('/', $site));
 
-        $vcs = VersionControlSystem::where("user_agent", "LIKE", $site)->first();
-        if (!$vcs) return;
-
-        if ($vcs->name == "Github") {
-            new GithubNotification($request);
-        } else if ($vcs->name == "Bitbucket") {
-            new BitbucketNotification($request);
+        $vcs = VersionControlSystem::where('user_agent', 'LIKE', $site)->first();
+        if (!$vcs) {
+            return;
         }
 
-        echo "Everything went well with " . $vcs->name . ".";
+        if ('Github' == $vcs->name) {
+            new GithubNotifier($request);
+        } elseif ('Bitbucket' == $vcs->name) {
+            new BitbucketNotifier($request);
+        }
+
+        echo 'Everything went well with '.$vcs->name.'.';
     }
 
     public function noAllowed()
     {
-        return view("notifier.notallowed");
+        return view('notifier.notallowed');
     }
-
 }
