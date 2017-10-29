@@ -60,15 +60,15 @@
             <div class="container">
                 <h2 class="section-title">Screenshots</h2>
                 <div class="row">
-                    <div class="col-12 col-xl-6">
-                        <h6>Request Review</h6>
-                        <img src="img/screenshot/request-review-pr-example.png" class="img-fluid" alt="Request review">
+                    <div class="col-12 col-xl-6 item">
+                            <h6>Request Review</h6>
+                            <img src="img/screenshot/request-review-pr-example.png" class="img-fluid" alt="Request review">
                     </div>
-                    <div class="col-12 col-xl-6">
+                    <div class="col-12 col-xl-6 item">
                         <h6>Request Changes</h6>
                         <img src="img/screenshot/request-changes-example.png" class="img-fluid" alt="Request review">
                     </div>
-                    <div class="col-12 col-xl-6">
+                    <div class="col-12 col-xl-6 item">
                         <h6>Mention in comment</h6>
                         <img src="img/screenshot/mention-in-comment-example.png" class="img-fluid" alt="Request review">
                     </div>

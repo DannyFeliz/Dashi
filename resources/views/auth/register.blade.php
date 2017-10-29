@@ -4,14 +4,21 @@
 <div class="login-wrapper ">
   <!-- START Login Background Pic Wrapper-->
   <div class="bg-pic">
-    <img class="auth-bg" src="" class="lazy">
+    <!-- <img class="auth-bg" src="" class="lazy"> -->
+    <!-- Alternative 1-->
+    <!-- <img src="https://picsum.photos/700/300/?random" class="lazy"> -->
+    <!-- Alternative 2 -->
+    <img src="https://source.unsplash.com/random/1600x700" class="lazy">
+
   </div>
   <!-- END Login Background Pic Wrapper-->
   <!-- START Login Right Container-->
   <div class="login-container bg-white">
     <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
         <div class="text-center">
+          <a href="{{ url('/') }}">
             <img src="{{ asset('img/dashi-logo.png') }}" alt="logo" data-src="{{ asset('img/dashi-logo.png') }}" data-src-retina="{{ asset('img/dashi-logo.png') }}" width="155" height="132">
+          </a>
         </div>
       <p class="p-t-20 text-center">Sign up or <a href="{{ url('/login') }}">Log In</a></p>
       <!-- START Login Form -->
