@@ -53,6 +53,8 @@ php artisan migrate
 # run the seeding methods
 php artisan db:seed
 
+# serves the app
+php artisan serve
 ```
 
 ## Contributing
