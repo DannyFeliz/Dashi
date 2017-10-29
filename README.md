@@ -1,8 +1,18 @@
 # [Dashi](https://github.com/DannyFeliz/Dashi)
 Get a notification in Slack every time someone asks you to check some code on Github or Bitbucket.
 
+## Usage
 
-# Installation 
+In order to start using Dashi in your daily routine, you need to: 
+
+1. Generate a [Slack Incoming WebHooks](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) and copy the URL.
+2. Signup at [Dashi](http://dashinotify.com/register)
+3. Type your Github or Bitbucket username
+4. Paste the copied Slack Webook URL
+
+You can visit the [Dashi homepage](http://dashinotify.com) to get a detailed guide.
+
+# Development setup
 
 Make sure you have installed PHP and MySQL/MariaDB.
 
@@ -45,20 +55,9 @@ php artisan db:seed
 
 ```
 
-## Usage
-
-In order to start using Dashi in your daily routine, you need to: 
-
-1. Generate a [Slack Incoming WebHooks](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks) and copy the URL.
-2. Signup at [Dashi](http://dashinotify.com/register)
-3. Type your Github or Bitbucket username
-4. Paste the copied Slack Webook URL
-
-You can visit the [Dashi homepage](http://dashinotify.com) to get a detailed guide.
-
 ## Contributing
 
-See the [CONTRIBUTING](CONTRIBUTING.md) file.
+Read our [contributing guide](https://github.com/DannyFeliz/Dashi/blob/repository-docs/.github/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to create a pull request.
 
 ## License
 
