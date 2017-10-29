@@ -12,7 +12,7 @@ In order to start using Dashi in your daily routine, you need to:
 
 You can visit the [Dashi homepage](http://dashinotify.com) to get a detailed guide.
 
-# Development setup
+## Development setup
 
 Make sure you have installed PHP and MySQL/MariaDB.
 
