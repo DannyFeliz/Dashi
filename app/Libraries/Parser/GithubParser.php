@@ -331,7 +331,7 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['pull_request']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = '::no_entry_sign:: This Pull Request was rejected.';
+        $pretext = ':no_entry_sign: This Pull Request was rejected.';
         $text = ':crossed_swords: Your Pull Request was rejected for some reason, check it out!';
 
         $this->attachment->setColor('#ce0502')
