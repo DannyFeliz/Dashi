@@ -227,8 +227,8 @@ class GithubParser implements ParserInterface
         $pretext = ':hammer_and_wrench: We want you to make some changes to this Pull Request.';
         $text = ':crossed_swords: Make the changes and update the Pull Request.';
 
-        $this->attachment->setColor('#ce0502')
-            ->setIconUrl(env('APP_URL') . '/img/dashi-danger.png')
+        $this->attachment->setColor('warning')
+            ->setIconUrl(env('APP_URL') . '/img/dashi-warning.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -334,8 +334,8 @@ class GithubParser implements ParserInterface
         $pretext = '::no_entry_sign:: This Pull Request was rejected.';
         $text = ':crossed_swords: Your Pull Request was rejected for some reason, check it out!';
 
-        $this->attachment->setColor('warning')
-            ->setIconUrl(env('APP_URL') . '/img/dashi-warning.png')
+        $this->attachment->setColor('#ce0502')
+            ->setIconUrl(env('APP_URL') . '/img/dashi-danger.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
