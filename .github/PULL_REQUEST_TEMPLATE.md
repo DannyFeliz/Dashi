@@ -20,5 +20,3 @@ https://github.com/DannyFeliz/Dashi/blob/repository-docs/.github/CONTRIBUTING.md
 
 - [ ] Yes
 - [ ] No
-
-**Other information:**
