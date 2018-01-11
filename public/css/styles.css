@@ -212,6 +212,7 @@ p{
 
 .login-wrapper .bg-pic>img {
     opacity: 1;
+    background-size: cover;
 }
 
 .login-wrapper .login-container {
