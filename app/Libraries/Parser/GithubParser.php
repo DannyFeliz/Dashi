@@ -177,7 +177,7 @@ class GithubParser implements ParserInterface
 
     private function setSubscribersRR()
     {
-        $this->subscribers[] = $this->request['sender']['login'];
+        $this->subscribers[] = $this->request['requested_reviewer']['login'];
     }
 
     private function setSubscribersCR()
