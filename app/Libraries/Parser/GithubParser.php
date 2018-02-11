@@ -102,6 +102,9 @@ class GithubParser implements ParserInterface
 
     private function buildSlackAttachmentFromRR()
     {
+        $fromBranch = $this->request['pull_request']['head']['ref'];
+        $toBranch = $this->request['pull_request']['base']['ref'];
+
         $authorName = $this->request['pull_request']['user']['login'];
         $authorIcon = $this->request['pull_request']['user']['avatar_url'];
         $authorLink = $this->request['pull_request']['user']['html_url'];
@@ -127,6 +130,11 @@ class GithubParser implements ParserInterface
             ->setFields([
                 'title' => 'Repository',
                 'value' => $this->request['repository']['name'],
+                'short' => true,
+            ])
+            ->setFields([
+                'title' => 'Branch',
+                'value' => "`{$fromBranch}` ⇢ `{$toBranch}`",
                 'short' => true,
             ])
             ->setFields([
@@ -262,8 +270,8 @@ class GithubParser implements ParserInterface
             ])
             ->setFields([
                 'title' => 'Branch',
-                'value' => "`{$toBranch}` :arrow_left: `{$fromBranch}`",
-                'short' => false,
+                'value' => "`{$fromBranch}` ⇢ `{$toBranch}`",
+                'short' => true,
             ])
             ->setFields([
                 'title' => 'From',
@@ -383,6 +391,9 @@ class GithubParser implements ParserInterface
 
     private function buildSlackAttachmentFromCPR()
     {
+        $fromBranch = $this->request['pull_request']['head']['ref'];
+        $toBranch = $this->request['pull_request']['base']['ref'];
+
         $authorName = $this->request['pull_request']['user']['login'];
         $authorIcon = $this->request['pull_request']['user']['avatar_url'];
         $authorLink = $this->request['pull_request']['user']['html_url'];
@@ -413,6 +424,11 @@ class GithubParser implements ParserInterface
             ->setFields([
                 'title' => 'Repository',
                 'value' => $this->request['repository']['name'],
+                'short' => true,
+            ])
+            ->setFields([
+                'title' => 'Branch',
+                'value' => "`{$fromBranch}` ⇢ `{$toBranch}`",
                 'short' => true,
             ])
             ->setFields([
