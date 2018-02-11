@@ -176,7 +176,7 @@ class GithubParser implements ParserInterface
         return 'closed' === $this->request['action'] && $this->request['pull_request']['merged'];
     }
     /**
-     * Check if request is a rejected (closed) pull request
+     * Check if request is a closed pull request
      *
      * @return boolean
      **/
@@ -216,7 +216,7 @@ class GithubParser implements ParserInterface
         }
     }
     /**
-     * Notifies the rejected pull request to the user.
+     * Notifies the closed pull request to the user.
      * @return void()
      **/
     private function setSubscribersCPR()
