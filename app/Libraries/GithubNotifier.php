@@ -40,7 +40,7 @@ class GithubNotifier
         }
 
         if (!$this->parser->parse()) {
-            echo 'We werent able to recognize this event :(';
+            echo "We weren't able to recognize this event :(";
 
             return;
         }
