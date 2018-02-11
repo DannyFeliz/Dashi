@@ -237,7 +237,10 @@ class GithubParser implements ParserInterface
         $fromBranch = $this->request['pull_request']['head']['ref'];
         $toBranch = $this->request['pull_request']['base']['ref'];
         $merger = $this->request['pull_request']['merged_by']['login'];
-        $merger = $merger == $this->request['sender']['login'] ? 'you' : $this->request['pull_request']['merged_by']['login'];
+        $merger = $merger == $this->request['sender']['login']
+                  ? 'you'
+                  : $this->request['pull_request']['merged_by']['login'];
+
         $authorName = $this->request['pull_request']['merged_by']['login'];
         $authorIcon = $this->request['pull_request']['merged_by']['avatar_url'];
         $authorLink = $this->request['pull_request']['merged_by']['html_url'];
