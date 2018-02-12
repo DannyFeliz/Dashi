@@ -2,6 +2,7 @@
 
 namespace App\Libraries\Parser;
 
+use App\Colors;
 use App\Libraries\Slack\SlackAttachment;
 
 class BitbucketParser implements ParserInterface
@@ -19,6 +20,7 @@ class BitbucketParser implements ParserInterface
     private $supportedActionRequest = [
         'pullrequest:created',
     ];
+    private $footer = 'Dashi';
 
     /**
      * BitbucketParser constructor.
@@ -98,7 +100,7 @@ class BitbucketParser implements ParserInterface
         $pretext = ":microscope: Hey! {$authorDisplayName} needs you to make a `Code Review` to these changes.";
         $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
 
-        $this->attachment->setColor('#36a64f')
+        $this->attachment->setColor(Colors::GREEN)
                          ->setPretext($pretext)
                          ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
                          ->setAuthorName($authorName)
@@ -117,7 +119,7 @@ class BitbucketParser implements ParserInterface
                             'value' => 'Bitbucket',
                             'short' => true,
                          ])
-                         ->setFooter('Dashi')
+                         ->setFooter($this->footer)
                          ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
