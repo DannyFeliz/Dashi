@@ -112,7 +112,7 @@ class GithubParser implements ParserInterface
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
         $pretext = ':microscope: Hey! We need you to make a `Code Review` to these changes.';
-        $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
+        $text = ':sleuth_or_spy: Make sure everything is in order before approving this pull request.';
 
         $this->attachment->setColor(Color::GREEN)
             ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
@@ -192,7 +192,7 @@ class GithubParser implements ParserInterface
      **/
     private function isClosedPullRequest(): bool
     {
-        return 'closed' === $this->request['action'];
+        return 'closed' === $this->request['action'] && !$this->request['pull_request']['merged'];
     }
 
     private function setSubscribers()
@@ -254,7 +254,7 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['pull_request']['merged_by']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ":cyclone: Your pull request have been merged by {$merger}.";
+        $pretext = ":cyclone: Your pull request was merged by {$merger}.";
         $this->attachment->setColor(Color::PURPLE)
             ->setIconUrl(env('APP_URL').'/img/dashi-merged.png')
             ->setPretext($pretext)
@@ -289,8 +289,8 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['pull_request']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ':hammer_and_wrench: We want you to make some changes to this Pull Request.';
-        $text = ':crossed_swords: Make the changes and update the Pull Request.';
+        $pretext = ':hammer_and_wrench: We want you to make some changes to this pull request.';
+        $text = ':crossed_swords: Make the changes and update the pull request.';
 
         $this->attachment->setColor(Color::RED)
             ->setIconUrl(env('APP_URL').'/img/dashi-warning.png')
@@ -327,7 +327,7 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['comment']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['comment']['html_url'];
-        $pretext = ':loud_sound: Someone mentioned you in this Pull Request!';
+        $pretext = ':loud_sound: Someone mentioned you in this pull request!';
         $text = ":left_speech_bubble: {$this->request['comment']['body']}";
 
         $this->attachment->setColor(Color::BLUE)
@@ -360,7 +360,7 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['pull_request']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ':arrow_up: New update in a Pull Request where you are a Reviewer.';
+        $pretext = ':arrow_up: New update in a pull request where you are a Reviewer.';
 
         $this->attachment->setColor(Color::BLUE)
             ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
@@ -391,14 +391,17 @@ class GithubParser implements ParserInterface
     {
         $fromBranch = $this->request['pull_request']['head']['ref'];
         $toBranch = $this->request['pull_request']['base']['ref'];
+        $closedBy = $this->request['sender']['login'];
+        $madeBy = $this->request['pull_request']['user']['login'];
+        $closer = $closedBy == $madeBy ? 'you' : $closedBy;
 
-        $authorName = $this->request['pull_request']['user']['login'];
-        $authorIcon = $this->request['pull_request']['user']['avatar_url'];
-        $authorLink = $this->request['pull_request']['user']['html_url'];
+        $authorName = $this->request['sender']['login'];
+        $authorIcon = $this->request['sender']['avatar_url'];
+        $authorLink = $this->request['sender']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ':no_entry_sign: This Pull Request was closed.';
-        $text = ':crossed_swords: Your Pull Request was closed for some reason, check it out!';
+        $pretext = ":no_entry_sign: This pull request was closed by {$closer}.";
+        $text = ':crossed_swords: Your pull request was closed for some reason, check it out!';
 
         if ($this->request['pull_request']['body']) {
             $this->attachment->setFields([
