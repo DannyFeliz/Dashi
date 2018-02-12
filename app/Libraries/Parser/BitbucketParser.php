@@ -2,7 +2,7 @@
 
 namespace App\Libraries\Parser;
 
-use App\Colors;
+use App\Color;
 use App\Libraries\Slack\SlackAttachment;
 
 class BitbucketParser implements ParserInterface
@@ -100,7 +100,7 @@ class BitbucketParser implements ParserInterface
         $pretext = ":microscope: Hey! {$authorDisplayName} needs you to make a `Code Review` to these changes.";
         $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
 
-        $this->attachment->setColor(Colors::GREEN)
+        $this->attachment->setColor(Color::GREEN)
                          ->setPretext($pretext)
                          ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
                          ->setAuthorName($authorName)

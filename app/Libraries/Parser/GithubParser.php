@@ -2,7 +2,7 @@
 
 namespace App\Libraries\Parser;
 
-use App\Colors;
+use App\Color;
 use App\Libraries\Slack\SlackAttachment;
 use App\Libraries\Utils;
 
@@ -114,7 +114,7 @@ class GithubParser implements ParserInterface
         $pretext = ':microscope: Hey! We need you to make a `Code Review` to these changes.';
         $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
 
-        $this->attachment->setColor(Colors::GREEN)
+        $this->attachment->setColor(Color::GREEN)
             ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
@@ -256,7 +256,7 @@ class GithubParser implements ParserInterface
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
         $pretext = ":cyclone: Your pull request have been merged by {$merger}.";
-        $this->attachment->setColor(Colors::PURPLE)
+        $this->attachment->setColor(Color::PURPLE)
             ->setIconUrl(env('APP_URL').'/img/dashi-merged.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
@@ -293,7 +293,7 @@ class GithubParser implements ParserInterface
         $pretext = ':hammer_and_wrench: We want you to make some changes to this Pull Request.';
         $text = ':crossed_swords: Make the changes and update the Pull Request.';
 
-        $this->attachment->setColor(Colors::RED)
+        $this->attachment->setColor(Color::RED)
             ->setIconUrl(env('APP_URL').'/img/dashi-warning.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
@@ -331,7 +331,7 @@ class GithubParser implements ParserInterface
         $pretext = ':loud_sound: Someone mentioned you in this Pull Request!';
         $text = ":left_speech_bubble: {$this->request['comment']['body']}";
 
-        $this->attachment->setColor(Colors::BLUE)
+        $this->attachment->setColor(Color::BLUE)
             ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
@@ -363,7 +363,7 @@ class GithubParser implements ParserInterface
         $titleLink = $this->request['pull_request']['html_url'];
         $pretext = ':arrow_up: New update in a Pull Request where you are a Reviewer.';
 
-        $this->attachment->setColor(Colors::BLUE)
+        $this->attachment->setColor(Color::BLUE)
             ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
@@ -409,7 +409,7 @@ class GithubParser implements ParserInterface
             ]);
         }
 
-        $this->attachment->setColor(Colors::RED)
+        $this->attachment->setColor(Color::RED)
             ->setIconUrl(env('APP_URL').'/img/dashi-danger.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)

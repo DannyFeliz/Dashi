@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Colors extends Model
+class Color extends Model
 {
     public const BLUE = '#047bff';
     public const GREEN = '#36a64f';
