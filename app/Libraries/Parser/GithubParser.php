@@ -2,9 +2,9 @@
 
 namespace App\Libraries\Parser;
 
+use App\Color;
 use App\Libraries\Slack\SlackAttachment;
 use App\Libraries\Utils;
-use App\Color;
 
 class GithubParser implements ParserInterface
 {
@@ -32,6 +32,7 @@ class GithubParser implements ParserInterface
         'review_requested', 'submitted',
         'created', 'synchronize', 'closed',
     ];
+    private $footer = 'Dashi';
 
     /**
      * GithubParser constructor.
@@ -111,10 +112,10 @@ class GithubParser implements ParserInterface
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
         $pretext = ':microscope: Hey! We need you to make a `Code Review` to these changes.';
-        $text = ':sleuth_or_spy: Make sure everything is in order before approving this Pull Request.';
+        $text = ':sleuth_or_spy: Make sure everything is in order before approving this pull request.';
 
-        $this->attachment->setColor(Color::REVIEW_REQUEST)
-            ->setIconUrl(env('APP_URL') . '/img/dashi-success.png')
+        $this->attachment->setColor(Color::GREEN)
+            ->setIconUrl(env('APP_URL').'/img/dashi-success.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -142,8 +143,8 @@ class GithubParser implements ParserInterface
                 'value' => 'Github',
                 'short' => true,
             ])
-            ->setFooter('Dashi')
-            ->setFooterIcon(env('APP_URL') . '/img/dashi-logo.png');
+            ->setFooter($this->footer)
+            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function setEvent(): bool
@@ -183,15 +184,15 @@ class GithubParser implements ParserInterface
     {
         return 'closed' === $this->request['action'] && $this->request['pull_request']['merged'];
     }
+
     /**
      * Check if request is a closed pull request
      *
-     * @return boolean
+     * @return bool
      **/
     private function isClosedPullRequest(): bool
     {
-        return 'closed' === $this->request['action'];
-
+        return 'closed' === $this->request['action'] && !$this->request['pull_request']['merged'];
     }
 
     private function setSubscribers()
@@ -223,17 +224,17 @@ class GithubParser implements ParserInterface
             $this->subscribers[] = $reviewers['login'];
         }
     }
+
     /**
      * Notifies the closed pull request to the user.
-     * @return void()
      **/
     private function setSubscribersCPR()
     {
         $this->subscribers[] = $this->request['pull_request']['user']['login'];
     }
+
     /**
      * Notifies to the owner of the pull request who merged it.
-     * @return void()
      **/
     private function setSubscribersMPR()
     {
@@ -244,19 +245,18 @@ class GithubParser implements ParserInterface
     {
         $fromBranch = $this->request['pull_request']['head']['ref'];
         $toBranch = $this->request['pull_request']['base']['ref'];
-        $merger = $this->request['pull_request']['merged_by']['login'];
-        $merger = $merger == $this->request['sender']['login']
-                  ? 'you'
-                  : $this->request['pull_request']['merged_by']['login'];
+        $mergedBy = $this->request['pull_request']['merged_by']['login'];
+        $madeBy = $this->request['pull_request']['user']['login'];
+        $merger = $mergedBy == $madeBy ? 'you' : $mergedBy;
 
         $authorName = $this->request['pull_request']['merged_by']['login'];
         $authorIcon = $this->request['pull_request']['merged_by']['avatar_url'];
         $authorLink = $this->request['pull_request']['merged_by']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ":cyclone: Your pull request have been merged by {$merger}.";
-        $this->attachment->setColor(Color::MERGED)
-            ->setIconUrl(env('APP_URL') . '/img/dashi-merged.png')
+        $pretext = ":cyclone: Your pull request was merged by {$merger}.";
+        $this->attachment->setColor(Color::PURPLE)
+            ->setIconUrl(env('APP_URL').'/img/dashi-merged.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -278,8 +278,8 @@ class GithubParser implements ParserInterface
                 'value' => 'Github',
                 'short' => true,
             ])
-            ->setFooter('Dashi')
-            ->setFooterIcon(env('APP_URL') . '/img/dashi-logo.png');
+            ->setFooter($this->footer)
+            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function buildSlackAttachmentFromCR()
@@ -289,11 +289,11 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['pull_request']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ':hammer_and_wrench: We want you to make some changes to this Pull Request.';
-        $text = ':crossed_swords: Make the changes and update the Pull Request.';
+        $pretext = ':hammer_and_wrench: We want you to make some changes to this pull request.';
+        $text = ':crossed_swords: Make the changes and update the pull request.';
 
-        $this->attachment->setColor(Color::REJECTED)
-            ->setIconUrl(env('APP_URL') . '/img/dashi-warning.png')
+        $this->attachment->setColor(Color::RED)
+            ->setIconUrl(env('APP_URL').'/img/dashi-warning.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -316,8 +316,8 @@ class GithubParser implements ParserInterface
                 'value' => 'Github',
                 'short' => true,
             ])
-            ->setFooter('Dashi')
-            ->setFooterIcon(env('APP_URL') . '/img/dashi-logo.png');
+            ->setFooter($this->footer)
+            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function buildSlackAttachmentFromMIC()
@@ -327,11 +327,11 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['comment']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['comment']['html_url'];
-        $pretext = ':loud_sound: Someone mentioned you in this Pull Request!';
+        $pretext = ':loud_sound: Someone mentioned you in this pull request!';
         $text = ":left_speech_bubble: {$this->request['comment']['body']}";
 
-        $this->attachment->setColor(Color::MENTION_IN_COMMENT)
-            ->setIconUrl(env('APP_URL') . '/img/dashi-info.png')
+        $this->attachment->setColor(Color::BLUE)
+            ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -349,8 +349,8 @@ class GithubParser implements ParserInterface
                 'value' => 'Github',
                 'short' => true,
             ])
-            ->setFooter('Dashi')
-            ->setFooterIcon(env('APP_URL') . '/img/dashi-logo.png');
+            ->setFooter($this->footer)
+            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 
     private function buildSlackAttachmentFromPOOPR()
@@ -360,10 +360,10 @@ class GithubParser implements ParserInterface
         $authorLink = $this->request['pull_request']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ':arrow_up: New update in a Pull Request where you are a Reviewer.';
+        $pretext = ':arrow_up: New update in a pull request where you are a Reviewer.';
 
-        $this->attachment->setColor(Color::PR_UPDATED)
-            ->setIconUrl(env('APP_URL') . '/img/dashi-info.png')
+        $this->attachment->setColor(Color::BLUE)
+            ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -380,28 +380,28 @@ class GithubParser implements ParserInterface
                 'value' => 'Github',
                 'short' => true,
             ])
-            ->setFooter('Dashi')
-            ->setFooterIcon(env('APP_URL') . '/img/dashi-logo.png');
+            ->setFooter($this->footer)
+            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
+
     /**
      * Prepare the data to notify the pull request creator.
-     *
-     * @return void
      */
-
     private function buildSlackAttachmentFromCPR()
     {
         $fromBranch = $this->request['pull_request']['head']['ref'];
         $toBranch = $this->request['pull_request']['base']['ref'];
+        $closedBy = $this->request['sender']['login'];
+        $madeBy = $this->request['pull_request']['user']['login'];
+        $closer = $closedBy == $madeBy ? 'you' : $closedBy;
 
-        $authorName = $this->request['pull_request']['user']['login'];
-        $authorIcon = $this->request['pull_request']['user']['avatar_url'];
-        $authorLink = $this->request['pull_request']['user']['html_url'];
+        $authorName = $this->request['sender']['login'];
+        $authorIcon = $this->request['sender']['avatar_url'];
+        $authorLink = $this->request['sender']['html_url'];
         $title = $this->request['pull_request']['title'];
         $titleLink = $this->request['pull_request']['html_url'];
-        $pretext = ':no_entry_sign: This Pull Request was closed.';
-        $text = ':crossed_swords: Your Pull Request was closed for some reason, check it out!';
-
+        $pretext = ":no_entry_sign: This pull request was closed by {$closer}.";
+        $text = ':crossed_swords: Your pull request was closed for some reason, check it out!';
 
         if ($this->request['pull_request']['body']) {
             $this->attachment->setFields([
@@ -411,9 +411,8 @@ class GithubParser implements ParserInterface
             ]);
         }
 
-
-        $this->attachment->setColor(Color::PR_CLOSED)
-            ->setIconUrl(env('APP_URL') . '/img/dashi-danger.png')
+        $this->attachment->setColor(Color::RED)
+            ->setIconUrl(env('APP_URL').'/img/dashi-danger.png')
             ->setPretext($pretext)
             ->setAuthorName($authorName)
             ->setAuthorLink($authorLink)
@@ -436,7 +435,7 @@ class GithubParser implements ParserInterface
                 'value' => 'Github',
                 'short' => true,
             ])
-            ->setFooter('Dashi')
-            ->setFooterIcon(env('APP_URL') . '/img/dashi-logo.png');
+            ->setFooter($this->footer)
+            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
     }
 }
