@@ -9,7 +9,6 @@ use App\Libraries\Utils;
 class GithubParser implements ParserInterface
 {
     private $request;
-    private $originalRequest;
     private $event;
     private $attachment;
     private $subscribers = [];
@@ -17,7 +16,6 @@ class GithubParser implements ParserInterface
         'reviewRequested' => 'isReviewRequested',
         'changesRequested' => 'isChangesRequested',
         'mentionedInComment' => 'isMentionedInComment',
-        'mentionedInPullRequest' => 'isMentionedInPullRequest',
         'pushOnOpenPullRequest' => 'isPushOnOpenPullRequest',
         'mergedPullRequest' => 'isMergedPullRequest',
         'closedPullRequest' => 'isClosedPullRequest',
@@ -26,7 +24,6 @@ class GithubParser implements ParserInterface
         'reviewRequested' => 'RR',
         'changesRequested' => 'CR',
         'mentionedInComment' => 'MIC',
-        'mentionedInPullRequest' => 'MENPR',
         'pushOnOpenPullRequest' => 'POOPR',
         'mergedPullRequest' => 'MPR',
         'closedPullRequest' => 'CPR',
@@ -44,9 +41,7 @@ class GithubParser implements ParserInterface
      */
     public function __construct($request)
     {
-        $payload = $request->toArray()['payload'];
-        $this->request = json_decode($payload, true);
-        $this->originalRequest = $request;
+        $this->request = $request;
         $this->attachment = new SlackAttachment();
     }
 
@@ -177,17 +172,12 @@ class GithubParser implements ParserInterface
 
     private function isMentionedInComment(): bool
     {
-        return $this->originalRequest->header("x-github-event") === 'pull_request_review_comment' && 'created' === $this->request['action'];
-    }
-
-    private function isMentionedInPullRequest(): bool
-    {
-        return $this->originalRequest->header("x-github-event") === 'issue_comment' && 'created' === $this->request['action'];
+        return 'created' === $this->request['action'];
     }
 
     private function isPushOnOpenPullRequest(): bool
     {
-        return 'synchronize' === $this->request['action'] && $this->request['pull_request']['state'] === 'open';
+        return 'synchronize' === $this->request['action'] && $this->request['pull_request']['state'] == 'open';
     }
 
     private function isMergedPullRequest(): bool
@@ -224,11 +214,6 @@ class GithubParser implements ParserInterface
     }
 
     private function setSubscribersMIC()
-    {
-        $this->subscribers = Utils::extractUsernames($this->request['comment']['body']);
-    }
-
-    private function setSubscribersMENPR()
     {
         $this->subscribers = Utils::extractUsernames($this->request['comment']['body']);
     }
@@ -345,41 +330,6 @@ class GithubParser implements ParserInterface
         $pretext = ':loud_sound: Someone mentioned you in this pull request!';
         $text = ":left_speech_bubble: {$this->request['comment']['body']}";
 
-        $this->attachment->setColor(Color::BLUE)
-            ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
-            ->setPretext($pretext)
-            ->setAuthorName($authorName)
-            ->setAuthorLink($authorLink)
-            ->setAuthorIcon($authorIcon)
-            ->setTitle($title)
-            ->setTitleLink($titleLink)
-            ->setText($text)
-            ->setFields([
-                'title' => 'Repository',
-                'value' => $this->request['repository']['name'],
-                'short' => true,
-            ])
-            ->setFields([
-                'title' => 'From',
-                'value' => 'Github',
-                'short' => true,
-            ])
-            ->setFooter($this->footer)
-            ->setFooterIcon(env('APP_URL').'/img/dashi-logo.png');
-    }
-
-    private function buildSlackAttachmentFromMENPR()
-    {
-        $authorName = $this->request['comment']['user']['login'];
-        $authorIcon = $this->request['comment']['user']['avatar_url'];
-        $authorLink = $this->request['comment']['user']['html_url'];
-        $senderName = $this->request['sender']['login'];
-        // Because comments in pull request are interpreted as issues comment we don't have the
-        // pull request data, so we hardcoded the title
-        $title = "Pull request";
-        $titleLink = $this->request['comment']['html_url'];
-        $pretext = ":loud_sound: ${senderName} mentioned you in this pull request!";
-        $text = ":left_speech_bubble: {$this->request['comment']['body']}";
         $this->attachment->setColor(Color::BLUE)
             ->setIconUrl(env('APP_URL').'/img/dashi-info.png')
             ->setPretext($pretext)

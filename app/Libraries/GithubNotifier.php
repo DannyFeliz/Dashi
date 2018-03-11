@@ -18,18 +18,19 @@ class GithubNotifier
      */
     public function __construct($request)
     {
-        $this->parser = new GithubParser($request);
+        $payload = $request->toArray()['payload'];
+        $this->parser = new GithubParser(json_decode($payload, true));
         $this->run();
     }
 
     public function run()
     {
-
         // We need to check if the action key exists because Github send us a request to verify
         // if the given endpoint exists, otherwise is an event that has been triggered
         if (!$this->parser->isAnActionRequest()) {
             return;
         }
+
         if (!$this->parser->isASupportedActionRequest()) {
             $actionsList = implode("', '", $this->parser->getSupportedActionRequest());
 
