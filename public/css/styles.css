@@ -219,6 +219,14 @@ p{
     opacity: 0.95;
 }
 
+.section.setup {
+    min-height: 1260px;
+}
+
+.section.setup .nav-tabs .nav-item {
+    cursor: pointer;
+}
+
 .section {
     padding: 70px 0px;
 }
