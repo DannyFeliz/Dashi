@@ -170,7 +170,7 @@
                             <div class="tab-pane" id="dashi">
                               <div class="row">
                                 <div class="col">
-                                  <ol class="m-t-20 p-r-25">
+                                  <ol class="p-r-25">
                                       <li>Go to <a href="http://dashinotify.com/login" target="_blank">Dashi</a> and login or signup</li>
                                       <li>Type your Github or Bitbucket username</li>
                                       <li>Paste the copied Slack Webook URL</li>
