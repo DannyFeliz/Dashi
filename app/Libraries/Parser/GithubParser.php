@@ -284,7 +284,7 @@ class GithubParser implements ParserInterface
 
     private function buildSlackAttachmentFromCR()
     {
-        $authorName = $this->request['sender']['login'];
+        $authorName = $this->request['pull_request']['user']['login'];
         $authorIcon = $this->request['pull_request']['user']['avatar_url'];
         $authorLink = $this->request['pull_request']['user']['html_url'];
         $title = $this->request['pull_request']['title'];
