@@ -59,7 +59,7 @@ php artisan serve
 
 ## Contributing
 
-Read our [contributing guide](https://github.com/DannyFeliz/Dashi/blob/repository-docs/.github/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to create a pull request.
+Read our [contributing guide](https://github.com/DannyFeliz/Dashi/blob/master/.github/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to create a pull request.
 
 ## License
 
