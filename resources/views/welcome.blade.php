@@ -148,13 +148,13 @@
                         <div class="card card-borderless m-t-20">
                           <ul class="nav nav-tabs nav-tabs-simple" role="tablist" data-init-reponsive-tabs="dropdownfx">
                             <li class="nav-item">
-                              <a class="active" data-toggle="tab" role="tab" data-target="#slack" href="#">Slack incoming webhooks setup</a>
+                              <a class="active" data-toggle="tab" role="tab" data-target="#slack">Slack incoming webhooks setup</a>
                             </li>
                             <li class="nav-item">
-                              <a href="#" data-toggle="tab" role="tab" data-target="#dashi">Dashi setup</a>
+                              <a data-toggle="tab" role="tab" data-target="#dashi">Dashi setup</a>
                             </li>
                             <li class="nav-item">
-                              <a href="#" data-toggle="tab" role="tab" data-target="#repository">Repository Setup</a>
+                              <a data-toggle="tab" role="tab" data-target="#repository">Repository Setup</a>
                             </li>
                           </ul>
                           <div class="tab-content">
