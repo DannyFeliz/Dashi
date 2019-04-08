@@ -177,7 +177,19 @@ class GithubParser implements ParserInterface
 
     private function isPushOnOpenPullRequest(): bool
     {
-        return 'synchronize' === $this->request['action'] && $this->request['pull_request']['state'] == 'open';
+        return 'synchronize' === $this->request['action']
+        && $this->isPullRequestOpen()
+        && !$this->isPullRequestDraft();
+    }
+
+    private function isPullRequestOpen() : bool
+    {
+        return $this->request['pull_request']['state'] == 'open';
+    }
+
+    private function isPullRequestDraft() : bool
+    {   
+        return  $this->request['pull_request']['draft'];
     }
 
     private function isMergedPullRequest(): bool
